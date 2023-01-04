@@ -8,7 +8,7 @@ class CommonAPI {
     final Uri uri = Uri.parse(
         '${ApiConstants.baseURL}$path?api_key=${ApiConstants.apiKey}');
     final response = await get(uri, headers: {
-      'Content-Type': 'applicaiton/json',
+      'Content-Type': 'application/json',
     });
 
     if (response.statusCode == 200) {
