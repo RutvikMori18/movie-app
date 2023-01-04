@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:movieapp/data/data_resources/movie_remote_data_source.dart';
 
 void main() {
+  MovieRemoteDataSource dataSource = MovieRemoteDataSourceImpl();
+  dataSource.getTrendingMovies();
+  dataSource.getPopular();
   runApp(const MyApp());
 }
 
