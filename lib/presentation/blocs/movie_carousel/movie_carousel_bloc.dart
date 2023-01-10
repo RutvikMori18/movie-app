@@ -24,6 +24,9 @@ class MovieCarouselBloc extends Bloc<MovieCarouselEvent, MovieCarouselState> {
           movieBackdropBloc
               .add(MovieBackdropChangedEvent(movies[event.defaultIndex]));
           MovieCarouselELoaded(defaultIndex: 0, movies: movies);
+
+          /// Radhen - just emit to check the flow you need to emit this event in bloc
+          emit(MovieCarouselELoaded(defaultIndex: 0, movies: movies));
         });
       }
     });
