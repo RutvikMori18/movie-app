@@ -5,8 +5,9 @@ import 'package:movieapp/data/core/api_constants.dart';
 
 class CommonAPI {
   dynamic getApi(String path) async {
-    final Uri uri = Uri.parse(
-        '${ApiConstants.baseURL}$path?api_key=${ApiConstants.apiKey}');
+    String url = '${ApiConstants.baseURL}$path?api_key=${ApiConstants.apiKey}';
+    print('url--->$url');
+    final Uri uri = Uri.parse(url);
     final response = await get(uri, headers: {
       'Content-Type': 'application/json',
     });

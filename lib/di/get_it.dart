@@ -38,7 +38,7 @@ Future init() async {
   getInstance.registerFactory(() => MovieCarouselBloc(
       getTrending: getInstance(), movieBackdropBloc: getInstance()));
 
-  getInstance.registerLazySingleton(() => MovieTabbedBloc(
+  getInstance.registerFactory(() => MovieTabbedBloc(
       //todo check
       getPopular: GetTrending(getInstance()),
       getPlayingNow: GetPlayingNow(getInstance()),

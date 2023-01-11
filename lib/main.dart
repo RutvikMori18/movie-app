@@ -1,11 +1,18 @@
 import 'dart:async';
 
+import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:movieapp/di/get_it.dart' as get_it;
 import 'package:movieapp/presentation/movie_app.dart';
 
-void main() {
+import 'domain/entities/app_error.dart';
+import 'domain/entities/movie_entity.dart';
+import 'domain/entities/no_params.dart';
+import 'domain/usecases/get_trending.dart';
+
+Future<void> main() async {
+  unawaited(get_it.init());
   /*  unawaited(get_it.init());
 
   // MovieRemoteDataSource dataSource = MovieRemoteDataSourceImpl();
@@ -38,6 +45,18 @@ void main() {
   //   //show null data
   // }*/
 
+  GetTrending getTrending = get_it.getInstance<GetTrending>();
+
+  final Either<AppError, List<MovieEntity>> result =
+      await getTrending(NoParams());
+  result.fold(
+    (l) {
+      print('error ->$l');
+    },
+    (r) {
+      print('List of Movies ->$r');
+    },
+  );
   WidgetsFlutterBinding.ensureInitialized();
   unawaited(
       SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]));

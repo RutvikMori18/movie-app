@@ -19,6 +19,5 @@ class MovieEntity {
 
   List<Object> get props => [id, title];
 
-  @override
   bool get stringify => true;
 }

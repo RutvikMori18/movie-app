@@ -25,6 +25,7 @@ class MovieRepositoryImpl extends MovieRepository {
   Future<Either<AppError, List<MovieEntity>>> getComingSoon() async {
     try {
       final movies = await remoteDataSource.getCommingSoon();
+      final movie;
       return Right(movies);
     } on Exception {
       return const Left(AppError('Something went wrong'));

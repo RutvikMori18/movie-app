@@ -6,8 +6,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movieapp/common/constants/size_constants.dart';
 import 'package:movieapp/common/extensions/size_extension.dart';
 import 'package:movieapp/common/screen_util/screenutil.dart';
-import 'package:movieapp/data/core/api_constants.dart';
 import 'package:movieapp/presentation/blocs/movie_backdrop/movie_backdrop_bloc.dart';
+
+import '../../../../data/core/api_constants.dart';
 
 class MovieBackDropWidget extends StatelessWidget {
   const MovieBackDropWidget({Key? key}) : super(key: key);
@@ -25,11 +26,16 @@ class MovieBackDropWidget extends StatelessWidget {
             child: BlocBuilder<MovieBackdropBloc, MovieBackdropState>(
               builder: (context, state) {
                 if (state is MovieBackdropChanged) {
+                  /*TODO image will not come in api*/
                   return CachedNetworkImage(
                     imageUrl:
                         '${ApiConstants.baseImageUrl}${state.movie.posterPath}',
                     fit: BoxFit.fitHeight,
                   );
+                  /*Image.asset(
+                    'assets/645154.jpg',
+                    fit: BoxFit.fitHeight,
+                  );*/
                 }
                 return const SizedBox.shrink();
               },
