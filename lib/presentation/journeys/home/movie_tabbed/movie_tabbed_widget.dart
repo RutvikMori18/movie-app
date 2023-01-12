@@ -17,6 +17,7 @@ class MovieTabbedWidget extends StatefulWidget {
 
 class _MovieTabbedWidgetState extends State<MovieTabbedWidget>
     with SingleTickerProviderStateMixin {
+  //getter function to call early declare the bloc instance
   MovieTabbedBloc get movieTabbedBloc =>
       BlocProvider.of<MovieTabbedBloc>(context);
 
@@ -25,7 +26,7 @@ class _MovieTabbedWidgetState extends State<MovieTabbedWidget>
   @override
   void initState() {
     super.initState();
-    movieTabbedBloc.add(MovieTabChangedState(currentTabIndex: currentTabIndex));
+    movieTabbedBloc.add(MovieTabChangedEvent(currentTabIndex: currentTabIndex));
   }
 
   @override
@@ -72,6 +73,6 @@ class _MovieTabbedWidgetState extends State<MovieTabbedWidget>
   void _onTabTapped(int index) {
     print('tab chagned ...$index');
     //when event changes occur then blow code written
-    movieTabbedBloc.add(MovieTabChangedState(currentTabIndex: index));
+    movieTabbedBloc.add(MovieTabChangedEvent(currentTabIndex: index));
   }
 }

@@ -8,7 +8,8 @@ import '../../../../data/core/api_constants.dart';
 
 class MovieTabCardWidget extends StatelessWidget {
   final int movieId;
-  final String title, posterPath;
+  final String title;
+  final String posterPath;
 
   const MovieTabCardWidget({
     Key? key,

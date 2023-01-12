@@ -21,8 +21,9 @@ class MovieTabbedBloc extends Bloc<MovieTabbedEvent, MovieTabbedState> {
       required this.getPlayingNow,
       required this.getComingSoon})
       : super(const MovieTabbedInitial(currentTabIndex: 0)) {
-    on<MovieTabChangedState>((event, emit) async {
-      if (event is MovieTabbedChanged) {
+    on<MovieTabChangedEvent>((event, emit) async {
+      if (event is MovieTabChangedEvent) {
+        print('bloc will call in any function in.......');
         Either<AppError, List<MovieEntity>> moviesEither;
         switch (event.currentTabIndex) {
           case 0:
@@ -47,6 +48,7 @@ class MovieTabbedBloc extends Bloc<MovieTabbedEvent, MovieTabbedState> {
             (movies) =>
                 emit(MovieTabbedChanged(event.currentTabIndex, movies)));
       }
+      print('bloc will call in any function');
     });
   }
 }

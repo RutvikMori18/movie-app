@@ -18,6 +18,7 @@ Future init() async {
 // getInstance.registerLazySingleton<Client>(() => Client());
 // getInstance.registerLazySingleton<ApiClient>(() => ApiClient(getInstance()));
 
+//registerLazySingleton used for the lazy initialize of the blocs
   getInstance.registerLazySingleton<MovieRemoteDataSource>(
       () => MovieRemoteDataSourceImpl());
 
@@ -38,6 +39,7 @@ Future init() async {
   getInstance.registerFactory(() => MovieCarouselBloc(
       getTrending: getInstance(), movieBackdropBloc: getInstance()));
 
+  //registerFactory used to instant register the blocs
   getInstance.registerFactory(() => MovieTabbedBloc(
       //todo check
       getPopular: GetTrending(getInstance()),

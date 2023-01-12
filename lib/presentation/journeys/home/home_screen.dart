@@ -6,6 +6,7 @@ import 'package:movieapp/presentation/blocs/movie_carousel/movie_carousel_bloc.d
 import 'package:movieapp/presentation/blocs/movie_tabbed/movie_tabbed_bloc.dart';
 import 'package:movieapp/presentation/journeys/home/movie_tabbed/movie_tabbed_widget.dart';
 
+import '../drawer/navigation_drawer.dart';
 import 'movie_carousel/movie_carousel_widget.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -16,7 +17,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  //initialize the bloc with getInstance
+  // 0 declare the bloc
   late MovieCarouselBloc movieCarouselBloc;
   late MovieBackdropBloc movieBackdropBloc;
   late MovieTabbedBloc movieTabbedBloc;
@@ -26,8 +27,12 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     movieCarouselBloc = getInstance<MovieCarouselBloc>();
     movieBackdropBloc = movieCarouselBloc.movieBackdropBloc;
+    // 1 initialize the bloc with getInstance
     movieTabbedBloc = getInstance<MovieTabbedBloc>();
-    movieTabbedBloc.add(const MovieTabChangedState(currentTabIndex: 0));
+    // 2 use the bloc
+    movieTabbedBloc.getPopular;
+    // 3 emit the event
+    movieTabbedBloc.add(const MovieTabChangedEvent(currentTabIndex: 0));
     movieCarouselBloc.add(const CarouselLoadEvent());
   }
 
@@ -55,6 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ],
       child: Scaffold(
+          drawer: const NavigationDrawer(),
           body: BlocBuilder<MovieCarouselBloc, MovieCarouselState>(
               bloc: movieCarouselBloc,
               builder: (context, state) {
