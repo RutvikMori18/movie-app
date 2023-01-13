@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movieapp/common/extensions/size_extension.dart';
-import 'package:movieapp/presentation/widgets/logo.dart';
+import 'package:movieapp/common/extensions/string_extension.dart';
 
+import '../../../common/constants/language.dart';
 import '../../../common/constants/size_constants.dart';
+import '../../../common/constants/translation_constants.dart';
+import '../../widgets/logo.dart';
 import 'navigation_expansion_list_items.dart';
 import 'navigation_list_item.dart';
 
@@ -35,20 +39,22 @@ class NavigationDrawer extends StatelessWidget {
               child: Logo(height: Sizes.dimen_20.h),
             ),
             NavigationListItem(
-              title: 'Favourite Movies',
+              title: TranslationConstants.favoriteMovies.t(context),
               onTap: () {},
             ),
             NavigationExpandedListItem(
-              title: 'Language',
-              onTap: () {},
-              children: const ['English', 'hindi'],
+              title: TranslationConstants.language.t(context),
+              onTap: (index) {
+                BlocProvider.of(context).state;
+              },
+              children: Language.languages.map((e) => e.value).toList(),
             ),
             NavigationListItem(
-              title: 'Feedback',
+              title: TranslationConstants.feedback.t(context),
               onTap: () {},
             ),
             NavigationListItem(
-              title: 'About',
+              title: TranslationConstants.about.t(context),
               onTap: () {},
             ),
           ],

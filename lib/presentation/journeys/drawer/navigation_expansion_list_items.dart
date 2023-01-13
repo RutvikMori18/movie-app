@@ -15,29 +15,24 @@ class NavigationExpandedListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        onTap;
-      },
-      child: Container(
-        decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-              blurRadius: 2,
-              color: Theme.of(context).primaryColor.withOpacity(0.5),
-            ),
-          ],
-        ),
-        child: ExpansionTile(
-          title: Text(
-            title,
-            style: Theme.of(context).textTheme.subtitle1,
+    return Container(
+      decoration: BoxDecoration(
+        boxShadow: [
+          BoxShadow(
+            blurRadius: 2,
+            color: Theme.of(context).primaryColor.withOpacity(0.5),
           ),
-          children: [
-            for (int i = 0; i < children.length; i++)
-              NavigationSubListItem(title: children[i], onTap: () {}),
-          ],
+        ],
+      ),
+      child: ExpansionTile(
+        title: Text(
+          title,
+          style: Theme.of(context).textTheme.subtitle1,
         ),
+        children: [
+          for (int i = 0; i < children.length; i++)
+            NavigationSubListItem(title: children[i], onTap: onTap(i)),
+        ],
       ),
     );
   }
