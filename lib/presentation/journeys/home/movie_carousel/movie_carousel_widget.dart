@@ -17,7 +17,7 @@ class MovieCarouselWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Stack(
-      fit: StackFit.expand,
+      // fit: StackFit.expand,
       children: [
         const MovieBackDropWidget(),
         Column(

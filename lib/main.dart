@@ -4,6 +4,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:movieapp/di/get_it.dart' as get_it;
+import 'package:movieapp/presentation/app_localizations.dart';
 import 'package:movieapp/presentation/movie_app.dart';
 
 import 'domain/entities/app_error.dart';
@@ -13,6 +14,7 @@ import 'domain/usecases/get_trending.dart';
 
 Future<void> main() async {
   unawaited(get_it.init());
+  AppLocalization(const Locale('en'));
   /*  unawaited(get_it.init());
 
   // MovieRemoteDataSource dataSource = MovieRemoteDataSourceImpl();

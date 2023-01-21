@@ -5,8 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:movieapp/common/constants/language.dart';
 
 class AppLocalization {
-  Locale locale;
-
+  final Locale locale;
   AppLocalization(this.locale);
 
   //used for all the string
