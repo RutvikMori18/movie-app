@@ -27,6 +27,8 @@ class _MovieAppState extends State<MovieApp> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    //to Initilize the util and app locale also
+    ScreenUtil.init();
     _languageBloc = getInstance<LanguageBloc>();
     AppLocalization(const Locale('En'));
   }
@@ -40,7 +42,6 @@ class _MovieAppState extends State<MovieApp> {
 
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.init();
     return BlocProvider<LanguageBloc>.value(
       value: _languageBloc,
       child: BlocBuilder<LanguageBloc, LanguageState>(
