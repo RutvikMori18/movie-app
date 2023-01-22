@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movieapp/common/constants/translation_constants.dart';
 import 'package:movieapp/common/extensions/size_extension.dart';
+import 'package:movieapp/common/extensions/string_extension.dart';
 import 'package:movieapp/presentation/blocs/movie_tabbed/movie_tabbed_bloc.dart';
 
 import '../../../../common/constants/size_constants.dart';
+import '../../../widgets/app_error.dart';
 import 'movie_list_view_builder.dart';
 import 'movie_tabbed_constants.dart';
 import 'tab_title_widget.dart';
@@ -58,9 +61,28 @@ class _MovieTabbedWidgetState extends State<MovieTabbedWidget>
                 ],
               ),
               if (state is MovieTabbedChanged)
+                state.movies.isEmpty ?? true
+                    ? Expanded(
+                        child: Center(
+                          child: Text(
+                            TranslationConstants.noMovies.t(context),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      )
+                    : Expanded(
+                        child: MovieListViewBuilder(
+                          movies: state.movies,
+                        ),
+                      ),
+              if (state is MovieTabLoadError)
                 Expanded(
-                  child: MovieListViewBuilder(
-                    movies: state.movies,
+                  child: AppErrorWidget(
+                    errorType: state.errorType,
+                    onPressed: movieTabbedBloc.add(
+                      MovieTabChangedEvent(
+                          currentTabIndex: state.currentTabIndex),
+                    ),
                   ),
                 ),
             ],

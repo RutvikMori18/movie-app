@@ -42,11 +42,14 @@ class MovieTabbedBloc extends Bloc<MovieTabbedEvent, MovieTabbedState> {
         }
 
         return moviesEither.fold(
-            (l) => MovieTabLoadError(
-                  currentTabIndex: event.currentTabIndex,
-                ),
-            (movies) =>
-                emit(MovieTabbedChanged(event.currentTabIndex, movies)));
+          (l) => MovieTabLoadError(
+            currentTabIndex: event.currentTabIndex,
+            errorType: l.appErrorType,
+          ),
+          (movies) => emit(
+            MovieTabbedChanged(event.currentTabIndex, movies),
+          ),
+        );
       }
       print('bloc will call in any function');
     });
