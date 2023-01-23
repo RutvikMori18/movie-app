@@ -1,6 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:movieapp/common/extensions/size_extension.dart';
+import 'package:movieapp/presentation/journeys/home/movie_detail/movie_detail_argument.dart';
+import 'package:movieapp/presentation/journeys/home/movie_detail/movie_detail_screen.dart';
 
 import '../../../../common/constants/size_constants.dart';
 import '../../../../data/core/api_constants.dart';
@@ -15,7 +17,16 @@ class MovieCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => MovieDetailScreen(
+              movieDetailArguments: MovieDetailArguments(movieID: movieId),
+            ),
+          ),
+        );
+      },
       child: ClipRRect(
         borderRadius: BorderRadius.circular(Sizes.dimen_16.w),
         child: CachedNetworkImage(
