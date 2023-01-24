@@ -2,11 +2,15 @@ import 'package:get_it/get_it.dart';
 import 'package:movieapp/data/data_resources/movie_remote_data_source.dart';
 import 'package:movieapp/data/repositories/movie_repository_impl.dart';
 import 'package:movieapp/domain/repositories/movie_repository.dart';
+import 'package:movieapp/domain/usecases/get_cast_crew.dart';
 import 'package:movieapp/domain/usecases/get_coming_soon.dart';
 import 'package:movieapp/domain/usecases/get_movie_detail.dart';
 import 'package:movieapp/domain/usecases/get_playing_now.dart';
 import 'package:movieapp/domain/usecases/get_popular.dart';
 import 'package:movieapp/domain/usecases/get_trending.dart';
+import 'package:movieapp/domain/usecases/get_videos.dart';
+import 'package:movieapp/presentation/blocs/cast/cast_bloc.dart';
+import 'package:movieapp/presentation/blocs/get_videos/get_video_bloc.dart';
 import 'package:movieapp/presentation/blocs/movie_backdrop/movie_backdrop_bloc.dart';
 import 'package:movieapp/presentation/blocs/movie_carousel/movie_carousel_bloc.dart';
 import 'package:movieapp/presentation/blocs/movie_detail_data/movie_data_bloc.dart';
@@ -38,6 +42,10 @@ Future init() async {
       .registerLazySingleton<GetPlayingNow>(() => GetPlayingNow(getInstance()));
   getInstance.registerLazySingleton<GetMovieDetail>(
       () => GetMovieDetail(getInstance()));
+  getInstance
+      .registerLazySingleton<GetCastCrew>(() => GetCastCrew(getInstance()));
+  getInstance
+      .registerLazySingleton<GetVideos>(() => GetVideos(getInstance()));
 
   getInstance.registerLazySingleton<MovieRepository>(
       () => MovieRepositoryImpl(getInstance()));
@@ -59,9 +67,20 @@ Future init() async {
   getInstance.registerFactory(
     () => MovieDataBloc(
       getMovieDetail: getInstance(),
+      castBloc: getInstance(),
+      videoBloc: getInstance(),
     ),
   );
 
+  getInstance.registerFactory<CastBloc>(
+    () => CastBloc(
+      getCast: getInstance(),
+    ),
+  );
+
+  getInstance.registerFactory<GetVideoBloc>(
+        () => GetVideoBloc(getVideos: getInstance()),
+  );
   //for single used singleton
   getInstance.registerSingleton<LanguageBloc>(LanguageBloc());
 }
