@@ -12,6 +12,7 @@ abstract class MovieRemoteDataSource {
   Future<List<MovieModel>> getTrendingMovies();
   Future<List<MovieModel>> getPopular();
   Future<List<MovieModel>> getPlayingNow();
+  Future<List<MovieModel>> getSearchMovies(String searchMovieText);
   Future<List<MovieModel>> getCommingSoon();
   Future<MovieDataModel> getMovieDetail(int id);
   Future<List<CastModel>> getCastCrew(int id);
@@ -89,5 +90,15 @@ class MovieRemoteDataSourceImpl extends MovieRemoteDataSource {
         VideoModel.fromJson(response).results ?? [];
     print(videosList);
     return videosList;
+  }
+
+  @override
+  Future<List<MovieModel>> getSearchMovies(String searchMovieText) async {
+    final Map<String, dynamic> response = await CommonAPI()
+        .getApi('search/movie', param: {'query': searchMovieText});
+
+    final List<MovieModel> movies = MovieResultModel.fromJson(response).results;
+
+    return movies;
   }
 }

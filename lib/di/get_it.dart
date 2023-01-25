@@ -9,6 +9,7 @@ import 'package:movieapp/domain/usecases/get_playing_now.dart';
 import 'package:movieapp/domain/usecases/get_popular.dart';
 import 'package:movieapp/domain/usecases/get_trending.dart';
 import 'package:movieapp/domain/usecases/get_videos.dart';
+import 'package:movieapp/domain/usecases/search_movies.dart';
 import 'package:movieapp/presentation/blocs/cast/cast_bloc.dart';
 import 'package:movieapp/presentation/blocs/get_videos/get_video_bloc.dart';
 import 'package:movieapp/presentation/blocs/movie_backdrop/movie_backdrop_bloc.dart';
@@ -16,6 +17,7 @@ import 'package:movieapp/presentation/blocs/movie_carousel/movie_carousel_bloc.d
 import 'package:movieapp/presentation/blocs/movie_detail_data/movie_data_bloc.dart';
 import 'package:movieapp/presentation/blocs/movie_langauge/language_bloc.dart';
 import 'package:movieapp/presentation/blocs/movie_tabbed/movie_tabbed_bloc.dart';
+import 'package:movieapp/presentation/blocs/search_movies/search_movies_bloc.dart';
 
 final getInstance = GetIt.I;
 
@@ -45,7 +47,8 @@ Future init() async {
   getInstance
       .registerLazySingleton<GetCastCrew>(() => GetCastCrew(getInstance()));
   getInstance
-      .registerLazySingleton<GetVideos>(() => GetVideos(getInstance()));
+      .registerLazySingleton<SearchMovies>(() => SearchMovies(getInstance()));
+  getInstance.registerLazySingleton<GetVideos>(() => GetVideos(getInstance()));
 
   getInstance.registerLazySingleton<MovieRepository>(
       () => MovieRepositoryImpl(getInstance()));
@@ -77,9 +80,14 @@ Future init() async {
       getCast: getInstance(),
     ),
   );
+  getInstance.registerFactory<SearchMoviesBloc>(
+    () => SearchMoviesBloc(
+      searchMovies: getInstance(),
+    ),
+  );
 
   getInstance.registerFactory<GetVideoBloc>(
-        () => GetVideoBloc(getVideos: getInstance()),
+    () => GetVideoBloc(getVideos: getInstance()),
   );
   //for single used singleton
   getInstance.registerSingleton<LanguageBloc>(LanguageBloc());
