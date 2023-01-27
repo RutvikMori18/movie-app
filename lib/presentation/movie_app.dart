@@ -29,8 +29,9 @@ class _MovieAppState extends State<MovieApp> {
     super.initState();
     //to Initilize the util and app locale also
     ScreenUtil.init();
-    _languageBloc = getInstance<LanguageBloc>();
     AppLocalization(const Locale('En'));
+    _languageBloc = getInstance<LanguageBloc>();
+    _languageBloc.add(LoadPreferredEvent());
   }
 
   @override

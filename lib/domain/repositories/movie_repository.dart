@@ -16,4 +16,10 @@ abstract class MovieRepository {
   Future<Either<AppError, List<VideoEntity>>> getVideos(int id);
   Future<Either<AppError, List<MovieEntity>>> getSearchMovies(
       String searchText);
+
+  //for local
+  Future<Either<AppError, void>> saveMovie(MovieEntity movieEntity);
+  Future<Either<AppError, bool>> checkIfMovieFav(int movieId);
+  Future<Either<AppError, List<MovieEntity>>> getFavMovies();
+  Future<Either<AppError, void>> deleteFavMovie(int movieId);
 }

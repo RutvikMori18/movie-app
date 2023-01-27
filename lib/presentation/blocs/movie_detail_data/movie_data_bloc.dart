@@ -5,6 +5,7 @@ import 'package:movieapp/domain/entities/app_error.dart';
 import 'package:movieapp/domain/entities/movie_detail_entity.dart';
 import 'package:movieapp/domain/entities/movie_params.dart';
 import 'package:movieapp/domain/usecases/get_movie_detail.dart';
+import 'package:movieapp/presentation/blocs/favourite/favourite_bloc.dart';
 import 'package:movieapp/presentation/blocs/get_videos/get_video_bloc.dart';
 
 import '../cast/cast_bloc.dart';
@@ -18,10 +19,12 @@ class MovieDataBloc extends Bloc<MovieDataEvent, MovieDataState> {
   final GetMovieDetail getMovieDetail;
   final CastBloc castBloc;
   final GetVideoBloc videoBloc;
+  final FavouriteBloc favouriteBloc;
 
   MovieDataBloc(
       {required this.videoBloc,
       required this.castBloc,
+      required this.favouriteBloc,
       required this.getMovieDetail})
       : super(MovieDataInitial()) {
     on<MovieDataEvent>((event, emit) async {
@@ -32,6 +35,7 @@ class MovieDataBloc extends Bloc<MovieDataEvent, MovieDataState> {
           MovieParams(event.movieId),
         );
 
+        favouriteBloc.add(CheckIfFavouriteMovieEvent(event.movieId));
         castBloc.add(
           LoadCastEvent(movieId: event.movieId),
         );

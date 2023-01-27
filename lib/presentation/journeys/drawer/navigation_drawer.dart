@@ -9,6 +9,7 @@ import '../../../common/constants/size_constants.dart';
 import '../../../common/constants/translation_constants.dart';
 import '../../widgets/app_dialog.dart';
 import '../../widgets/logo.dart';
+import '../favourite/favourite_screen.dart';
 import 'navigation_expansion_list_items.dart';
 import 'navigation_list_item.dart';
 
@@ -42,7 +43,13 @@ class NavigationDrawer extends StatelessWidget {
             ),
             NavigationListItem(
               title: TranslationConstants.favoriteMovies.t(context),
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const FavouriteScreen(),
+                    ));
+              },
             ),
             NavigationExpandedListItem(
               title: TranslationConstants.language.t(context),

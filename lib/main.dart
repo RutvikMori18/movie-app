@@ -3,9 +3,12 @@ import 'dart:async';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:hive/hive.dart';
+import 'package:movieapp/data/tables/movie_table.dart';
 import 'package:movieapp/di/get_it.dart' as get_it;
 import 'package:movieapp/presentation/app_localizations.dart';
 import 'package:movieapp/presentation/movie_app.dart';
+import 'package:path_provider/path_provider.dart';
 
 import 'domain/entities/app_error.dart';
 import 'domain/entities/movie_entity.dart';
@@ -59,6 +62,10 @@ Future<void> main() async {
       print('List of Movies ->$r');
     },
   );
+  final appDocumentDir = await getApplicationDocumentsDirectory();
+  Hive.init(appDocumentDir.path);
+  //external file register with adapter
+  Hive.registerAdapter(MovieTableAdapter());
   WidgetsFlutterBinding.ensureInitialized();
   unawaited(
       SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]));

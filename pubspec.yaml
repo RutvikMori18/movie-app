@@ -46,10 +46,14 @@ dependencies:
   cached_network_image: ^3.2.3
   wiredash: ^1.5.0
   youtube_player_flutter: ^8.1.2
+  hive: ^2.2.3
+  path_provider: ^2.0.12
   flutter_localizations:
     sdk: flutter
 
 dev_dependencies:
+  hive_generator: ^2.0.0
+  build_runner: ^2.3.3
   flutter_test:
     sdk: flutter
 

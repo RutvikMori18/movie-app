@@ -1,3 +1,5 @@
+import 'package:movieapp/domain/entities/movie_detail_entity.dart';
+
 class MovieEntity {
   final String posterPath;
   final int id;
@@ -20,4 +22,15 @@ class MovieEntity {
   List<Object> get props => [id, title];
 
   bool get stringify => true;
+
+  factory MovieEntity.fromMovieDetailEntity(
+      {required MovieDetailEntity movieDetailEntity}) {
+    return MovieEntity(
+        posterPath: movieDetailEntity.posterPath,
+        id: (movieDetailEntity.id).toInt(),
+        backdropPath: movieDetailEntity.backDropPath,
+        title: movieDetailEntity.title,
+        voteAverage: movieDetailEntity.voteAverage,
+        releaseDate: movieDetailEntity.releaseDate);
+  }
 }

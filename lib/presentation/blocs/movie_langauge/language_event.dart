@@ -14,3 +14,9 @@ class ToggleLanguageEvent extends LanguageEvent {
   @override
   List<Object> get props => [languageEntity];
 }
+
+class LoadPreferredEvent extends LanguageEvent {
+  @override
+  // TODO: implement props
+  List<Object> get props => [];
+}
