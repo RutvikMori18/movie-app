@@ -18,14 +18,16 @@ class MovieCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => MovieDetailScreen(
-              movieDetailArguments: MovieDetailArguments(movieID: movieId),
-            ),
-          ),
-        );
+        Navigator.pushNamed(RouteList.movieDetail,
+            arguments: MovieDetailArguments(movieID: movieId));
+        // Navigator.push(
+        //   context,
+        //   MaterialPageRoute(
+        //     builder: (context) => MovieDetailScreen(
+        //       movieDetailArguments: MovieDetailArguments(movieID: movieId),
+        //     ),
+        //   ),
+        // );
       },
       child: ClipRRect(
         borderRadius: BorderRadius.circular(Sizes.dimen_16.w),

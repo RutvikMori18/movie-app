@@ -24,13 +24,15 @@ class FavouriteMovieCardWidget extends StatelessWidget {
       ),
       child: InkWell(
         onTap: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => MovieDetailScreen(
-                    movieDetailArguments:
-                        MovieDetailArguments(movieID: movie.id)),
-              ));
+          Navigator.pushNamed(RouteList.movieDetail,
+              arguments: MovieDetailArguments(movieID: movieId));
+          // Navigator.push(
+          //     context,
+          //     MaterialPageRoute(
+          //       builder: (context) => MovieDetailScreen(
+          //           movieDetailArguments:
+          //               MovieDetailArguments(movieID: movie.id)),
+          //     ));
         },
         child: ClipRRect(
           borderRadius: BorderRadius.circular(Sizes.dimen_8.w),

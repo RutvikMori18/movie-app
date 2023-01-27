@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:movieapp/common/extensions/size_extension.dart';
 import 'package:movieapp/common/extensions/string_extension.dart';
 
+import '../../../../common/constants/route_constants.dart';
 import '../../../../common/constants/size_constants.dart';
 import '../../../../data/core/api_constants.dart';
-import '../movie_detail/movie_detail_argument.dart';
-import '../movie_detail/movie_detail_screen.dart';
+import '../movie_detail/movie_detail_argumentil_screen.dart';
 
 class MovieTabCardWidget extends StatelessWidget {
   final int movieId;
@@ -24,14 +24,16 @@ class MovieTabCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => MovieDetailScreen(
-              movieDetailArguments: MovieDetailArguments(movieID: movieId),
-            ),
-          ),
-        );
+        Navigator.pushNamed(RouteList.movieDetail,
+            arguments: [MovieDetailArguments(movieID: movieId)]);
+        // Navigator.push(
+        //   context,
+        //   MaterialPageRoute(
+        //     builder: (context) => MovieDetailScreen(
+        //       movieDetailArguments: MovieDetailArguments(movieID: movieId),
+        //     ),
+        //   ),
+        // );
       },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
