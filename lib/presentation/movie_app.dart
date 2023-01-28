@@ -58,12 +58,11 @@ class _MovieAppState extends State<MovieApp> {
                 title: 'Movie app',
                 theme: ThemeData(
                   unselectedWidgetColor: AppTheme.vulcan,
-                  accentColor: AppTheme.royalBlue,
                   primaryColor: AppTheme.vulcan,
                   scaffoldBackgroundColor: AppTheme.vulcan,
                   visualDensity: VisualDensity.adaptivePlatformDensity,
                   textTheme: ThemeText.getTextTheme(),
-                  appBarTheme: const AppBarTheme(elevation: 0.0),
+                  appBarTheme: const AppBarTheme(elevation: 0.0), colorScheme: ColorScheme.fromSwatch().copyWith(secondary: AppTheme.royalBlue),
                 ),
                 //used for the language localization
                 supportedLocales:
@@ -82,7 +81,7 @@ class _MovieAppState extends State<MovieApp> {
                   final Map<String, Widget Function(BuildContext)> routes =
                       Routes.getRoutes(setting);
                   final WidgetBuilder builder = routes[setting.name]!;
-                  return FadePageRouteBuilder(builder, setting);
+                  return FadePageRouteBuilder(builder: builder, setting: setting);
                 },
               ),
             );

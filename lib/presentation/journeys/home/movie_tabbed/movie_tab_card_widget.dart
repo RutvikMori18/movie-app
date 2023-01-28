@@ -6,7 +6,7 @@ import 'package:movieapp/common/extensions/string_extension.dart';
 import '../../../../common/constants/route_constants.dart';
 import '../../../../common/constants/size_constants.dart';
 import '../../../../data/core/api_constants.dart';
-import '../movie_detail/movie_detail_argumentil_screen.dart';
+import '../movie_detail/movie_detail_argument.dart';
 
 class MovieTabCardWidget extends StatelessWidget {
   final int movieId;
@@ -24,7 +24,7 @@ class MovieTabCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.pushNamed(RouteList.movieDetail,
+        Navigator.pushNamed(context, RouteList.movieDetail,
             arguments: [MovieDetailArguments(movieID: movieId)]);
         // Navigator.push(
         //   context,

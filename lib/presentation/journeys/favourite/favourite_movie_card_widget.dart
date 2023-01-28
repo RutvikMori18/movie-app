@@ -5,9 +5,9 @@ import 'package:movieapp/common/constants/size_constants.dart';
 import 'package:movieapp/common/extensions/size_extension.dart';
 import 'package:movieapp/domain/entities/movie_entity.dart';
 import 'package:movieapp/presentation/blocs/favourite/favourite_bloc.dart';
-import 'package:movieapp/presentation/journeys/home/movie_detail/movie_detail_argument.dart';
-import 'package:movieapp/presentation/journeys/home/movie_detail/movie_detail_screen.dart';
+import 'package:movieapp/presentation/journeys/home/movie_detail/movie_detail_argumentl_screen.dart';
 
+import '../../../common/constants/route_constants.dart';
 import '../../../data/core/api_constants.dart';
 
 class FavouriteMovieCardWidget extends StatelessWidget {
@@ -24,8 +24,8 @@ class FavouriteMovieCardWidget extends StatelessWidget {
       ),
       child: InkWell(
         onTap: () {
-          Navigator.pushNamed(RouteList.movieDetail,
-              arguments: MovieDetailArguments(movieID: movieId));
+          Navigator.pushNamed(context, RouteList.movieDetail,
+              arguments: MovieDetailArguments(movieID: movie.id));
           // Navigator.push(
           //     context,
           //     MaterialPageRoute(

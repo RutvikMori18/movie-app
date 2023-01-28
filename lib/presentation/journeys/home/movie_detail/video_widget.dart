@@ -5,7 +5,7 @@ import 'package:movieapp/presentation/blocs/get_videos/get_video_bloc.dart';
 import '../../../../common/constants/route_constants.dart';
 import '../../../../common/constants/translation_constants.dart';
 import '../../../widgets/button.dart';
-import '../../watch_video/watch_video_argumento_screen.dart';
+import '../../watch_video/watch_video_argument.dart';
 
 class VideoWidget extends StatelessWidget {
   final GetVideoBloc videoBloc;
@@ -21,7 +21,7 @@ class VideoWidget extends StatelessWidget {
           return Button(
             text: TranslationConstants.watchTrailers,
             onPressed: () {
-              Navigator.pushNamed(RouteList.watchTrailer,
+              Navigator.pushNamed(context,RouteList.watchTrailer,
                   arguments: WatchVideoArguments(videos: video));
               // Navigator.push(
               //   context,
