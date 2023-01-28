@@ -17,5 +17,7 @@ class FadePageRouteBuilder<T> extends PageRouteBuilder<T> {
                 end: 1.0,
               ).chain(CurveTween(curve: curve));
               return FadeTransition(opacity: animation.drive(tween));
-            });
+            },
+            transitionDuration: const Duration(milliseconds: 500),
+            settings: setting);
 }

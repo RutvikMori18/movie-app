@@ -1,3 +1,5 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movieapp/common/extensions/size_extension.dart';
@@ -9,7 +11,7 @@ import '../../../common/constants/route_constants.dart';
 import '../../../common/constants/size_constants.dart';
 import '../../../common/constants/translation_constants.dart';
 import '../../widgets/app_dialog.dart';
-import '../../widgets/logo.dart';ogo.dart';
+import '../../widgets/logo.dart';/logo.dart';
 
 import 'navigation_expansion_list_items.dart';
 import 'navigation_list_item.dart';
