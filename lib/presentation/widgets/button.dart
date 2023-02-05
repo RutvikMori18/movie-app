@@ -5,9 +5,14 @@ import 'package:movieapp/common/extensions/string_extension.dart';
 import 'package:movieapp/presentation/themes/theme_color.dart';
 
 class Button extends StatelessWidget {
-  final void Function() onPressed;
+  final void Function()? onPressed;
   final String text;
-  const Button({Key? key, required this.text, required this.onPressed})
+  final bool? isEnable;
+  const Button(
+      {Key? key,
+      required this.text,
+      required this.onPressed,
+      this.isEnable = true})
       : super(key: key);
 
   @override
@@ -25,7 +30,7 @@ class Button extends StatelessWidget {
         ),
       ),
       child: TextButton(
-        onPressed: onPressed,
+        onPressed: isEnable ?? true ? onPressed : null,
         child: Text(
           text.t(context),
           style: Theme.of(context).textTheme.button,

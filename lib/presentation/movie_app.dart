@@ -4,6 +4,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:movieapp/common/screen_util/screenutil.dart';
 import 'package:movieapp/di/get_it.dart';
 import 'package:movieapp/presentation/app_localizations.dart';
+import 'package:movieapp/presentation/blocs/login/login_bloc.dart';
 import 'package:movieapp/presentation/routes.dart';
 import 'package:movieapp/presentation/themes/theme_color.dart';
 import 'package:movieapp/presentation/themes/theme_text.dart';
@@ -24,6 +25,7 @@ class MovieApp extends StatefulWidget {
 class _MovieAppState extends State<MovieApp> {
   final _navigatorKey = GlobalKey<NavigatorState>();
   late LanguageBloc _languageBloc;
+  late LoginBloc _loginBloc;
 
   @override
   void initState() {
@@ -34,60 +36,75 @@ class _MovieAppState extends State<MovieApp> {
     AppLocalization(const Locale('En'));
     _languageBloc = getInstance<LanguageBloc>();
     _languageBloc.add(LoadPreferredEvent());
+    _loginBloc = getInstance<LoginBloc>();
   }
 
   @override
   void dispose() {
     // TODO: implement dispose
     super.dispose();
+    _loginBloc.close();
     _languageBloc.close();
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<LanguageBloc>.value(
-      value: _languageBloc,
-      child: BlocBuilder<LanguageBloc, LanguageState>(
-        builder: (context, state) {
-          if (state is LanguageLoaded) {
-            return WiredashApp(
-              languageCode: state.locale.languageCode,
-              child: MaterialApp(
-                navigatorKey: _navigatorKey,
-                debugShowCheckedModeBanner: false,
-                title: 'Movie app',
-                theme: ThemeData(
-                  unselectedWidgetColor: AppTheme.vulcan,
-                  primaryColor: AppTheme.vulcan,
-                  scaffoldBackgroundColor: AppTheme.vulcan,
-                  visualDensity: VisualDensity.adaptivePlatformDensity,
-                  textTheme: ThemeText.getTextTheme(),
-                  appBarTheme: const AppBarTheme(elevation: 0.0), colorScheme: ColorScheme.fromSwatch().copyWith(secondary: AppTheme.royalBlue),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<LanguageBloc>.value(
+          value: _languageBloc,
+        ),
+        BlocProvider<LoginBloc>.value(
+          value: _loginBloc,
+        ),
+      ],
+      child: BlocProvider<LanguageBloc>.value(
+        value: _languageBloc,
+        child: BlocBuilder<LanguageBloc, LanguageState>(
+          builder: (context, state) {
+            if (state is LanguageLoaded) {
+              return WiredashApp(
+                languageCode: state.locale.languageCode,
+                child: MaterialApp(
+                  navigatorKey: _navigatorKey,
+                  debugShowCheckedModeBanner: false,
+                  title: 'Movie app',
+                  theme: ThemeData(
+                    unselectedWidgetColor: AppTheme.vulcan,
+                    primaryColor: AppTheme.vulcan,
+                    scaffoldBackgroundColor: AppTheme.vulcan,
+                    visualDensity: VisualDensity.adaptivePlatformDensity,
+                    textTheme: ThemeText.getTextTheme(),
+                    appBarTheme: const AppBarTheme(elevation: 0.0),
+                    colorScheme: ColorScheme.fromSwatch()
+                        .copyWith(secondary: AppTheme.royalBlue),
+                  ),
+                  //used for the language localization
+                  supportedLocales:
+                      Language.languages.map((e) => Locale(e.code)).toList(),
+                  locale: state.locale,
+                  localizationsDelegates: [
+                    AppLocalization.delegate,
+                    GlobalMaterialLocalizations.delegate,
+                    GlobalWidgetsLocalizations.delegate,
+                  ],
+                  initialRoute: RouteList.initial,
+                  builder: (context, child) {
+                    return child ?? Container();
+                  },
+                  onGenerateRoute: (RouteSettings setting) {
+                    final Map<String, Widget Function(BuildContext)> routes =
+                        Routes.getRoutes(setting);
+                    final WidgetBuilder builder = routes[setting.name]!;
+                    return FadePageRouteBuilder(
+                        builder: builder, setting: setting);
+                  },
                 ),
-                //used for the language localization
-                supportedLocales:
-                    Language.languages.map((e) => Locale(e.code)).toList(),
-                locale: state.locale,
-                localizationsDelegates: [
-                  AppLocalization.delegate,
-                  GlobalMaterialLocalizations.delegate,
-                  GlobalWidgetsLocalizations.delegate,
-                ],
-                initialRoute: RouteList.initial,
-                builder: (context, child) {
-                  return child ?? Container();
-                },
-                onGenerateRoute: (RouteSettings setting) {
-                  final Map<String, Widget Function(BuildContext)> routes =
-                      Routes.getRoutes(setting);
-                  final WidgetBuilder builder = routes[setting.name]!;
-                  return FadePageRouteBuilder(builder: builder, setting: setting);
-                },
-              ),
-            );
-          }
-          return const SizedBox.shrink();
-        },
+              );
+            }
+            return const SizedBox.shrink();
+          },
+        ),
       ),
     );
   }

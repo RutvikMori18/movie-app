@@ -4,8 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movieapp/common/constants/size_constants.dart';
 import 'package:movieapp/common/extensions/size_extension.dart';
 import 'package:movieapp/domain/entities/movie_entity.dart';
-import 'package:movieapp/presentation/blocs/favourite/favourite_bloc.dart';art';
-
+import 'package:movieapp/presentation/blocs/favourite/favourite_bloc.dart';
 
 import '../../../common/constants/route_constants.dart';
 import '../../../data/core/api_constants.dart';
