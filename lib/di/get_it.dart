@@ -64,8 +64,8 @@ Future init() async {
   getInstance
       .registerLazySingleton<SearchMovies>(() => SearchMovies(getInstance()));
   getInstance.registerLazySingleton<GetVideos>(() => GetVideos(getInstance()));
-  getInstance
-      .registerLazySingleton<SearchMovies>(() => SearchMovies(getInstance()));
+  // getInstance
+  //     .registerLazySingleton<SearchMovies>(() => SearchMovies(getInstance()));
   getInstance.registerLazySingleton<CheckIfFavMovie>(
       () => CheckIfFavMovie(getInstance()));
   getInstance.registerLazySingleton<DeleteFavMovie>(

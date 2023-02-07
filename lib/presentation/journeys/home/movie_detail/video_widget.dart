@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movieapp/presentation/blocs/get_videos/get_video_bloc.dart';
 
-import '../../../../common/constants/route_constants.dart';
 import '../../../../common/constants/translation_constants.dart';
 import '../../../widgets/button.dart';
 import '../../watch_video/watch_video_argument.dart';
+import '../../watch_video/watch_video_screen.dart';
 
 class VideoWidget extends StatelessWidget {
   final GetVideoBloc videoBloc;
@@ -21,16 +21,16 @@ class VideoWidget extends StatelessWidget {
           return Button(
             text: TranslationConstants.watchTrailers,
             onPressed: () {
-              Navigator.pushNamed(context,RouteList.watchTrailer,
-                  arguments: WatchVideoArguments(videos: video));
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(
-              //     builder: (context) => WatchVideoScreen(
-              //       arguments: WatchVideoArguments(videos: video),
-              //     ),
-              //   ),
-              // );
+              // Navigator.pushNamed(context,RouteList.watchTrailer,
+              //     arguments: WatchVideoArguments(videos: video));
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => WatchVideoScreen(
+                    arguments: WatchVideoArguments(videos: video),
+                  ),
+                ),
+              );
             },
           );
         } else if (state is NoVideosState) {

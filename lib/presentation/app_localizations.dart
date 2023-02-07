@@ -12,7 +12,7 @@ class AppLocalization {
   static AppLocalization of(context) =>
       Localizations.of<AppLocalization>(context, AppLocalization)!;
 
-  Map<String, String> _localizationStrings;
+  Map<String, String> _localizationStrings = {};
 
   Future<bool> load() async {
     final jsonString = await rootBundle

@@ -4,12 +4,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movieapp/common/constants/size_constants.dart';
 import 'package:movieapp/common/extensions/size_extension.dart';
 import 'package:movieapp/domain/entities/movie_entity.dart';
-import 'package:movieapp/presentation/blocs/favourite/favourite_bloc.dart';art';
+import 'package:movieapp/presentation/blocs/favourite/favourite_bloc.dart';
 
-
-import '../../../common/constants/route_constants.dart';
 import '../../../data/core/api_constants.dart';
 import '../home/movie_detail/movie_detail_argument.dart';
+import '../home/movie_detail/movie_detail_screen.dart';
 
 class FavouriteMovieCardWidget extends StatelessWidget {
   final MovieEntity movie;
@@ -25,15 +24,15 @@ class FavouriteMovieCardWidget extends StatelessWidget {
       ),
       child: InkWell(
         onTap: () {
-          Navigator.pushNamed(context, RouteList.movieDetail,
-              arguments: MovieDetailArguments(movieID: movie.id));
-          // Navigator.push(
-          //     context,
-          //     MaterialPageRoute(
-          //       builder: (context) => MovieDetailScreen(
-          //           movieDetailArguments:
-          //               MovieDetailArguments(movieID: movie.id)),
-          //     ));
+          // Navigator.pushNamed(context, RouteList.movieDetail,
+          //     arguments: MovieDetailArguments(movieID: movie.id));
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => MovieDetailScreen(
+                    movieDetailArguments:
+                        MovieDetailArguments(movieID: movie.id)),
+              ));
         },
         child: ClipRRect(
           borderRadius: BorderRadius.circular(Sizes.dimen_8.w),

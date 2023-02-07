@@ -6,7 +6,6 @@ import 'package:flutter/services.dart';
 import 'package:hive/hive.dart';
 import 'package:movieapp/data/tables/movie_table.dart';
 import 'package:movieapp/di/get_it.dart' as get_it;
-import 'package:movieapp/presentation/app_localizations.dart';
 import 'package:movieapp/presentation/movie_app.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -16,8 +15,8 @@ import 'domain/entities/no_params.dart';
 import 'domain/usecases/get_trending.dart';
 
 Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   unawaited(get_it.init());
-  AppLocalization(const Locale('en'));
   /*  unawaited(get_it.init());
 
   // MovieRemoteDataSource dataSource = MovieRemoteDataSourceImpl();
@@ -66,9 +65,9 @@ Future<void> main() async {
   Hive.init(appDocumentDir.path);
   //external file register with adapter
   Hive.registerAdapter(MovieTableAdapter());
-  WidgetsFlutterBinding.ensureInitialized();
+
   unawaited(
       SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]));
-  unawaited(get_it.init());
+  // unawaited(get_it.init());
   runApp(const MovieApp());
 }

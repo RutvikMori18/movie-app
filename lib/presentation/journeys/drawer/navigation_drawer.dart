@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movieapp/common/extensions/size_extension.dart';
@@ -7,12 +5,11 @@ import 'package:movieapp/common/extensions/string_extension.dart';
 import 'package:wiredash/wiredash.dart';
 
 import '../../../common/constants/language.dart';
-import '../../../common/constants/route_constants.dart';
 import '../../../common/constants/size_constants.dart';
 import '../../../common/constants/translation_constants.dart';
 import '../../widgets/app_dialog.dart';
-import '../../widgets/logo.dart';/logo.dart';
-
+import '../../widgets/logo.dart';
+import '../favourite/favourite_screen.dart';
 import 'navigation_expansion_list_items.dart';
 import 'navigation_list_item.dart';
 
@@ -47,12 +44,12 @@ class NavigationDrawer extends StatelessWidget {
             NavigationListItem(
               title: TranslationConstants.favoriteMovies.t(context),
               onTap: () {
-                Navigator.pushNamed(context,RouteList.favourite);
-                // Navigator.push(
-                //     context,
-                //     MaterialPageRoute(
-                //       builder: (context) => const FavouriteScreen(),
-                //     ));
+                // Navigator.pushNamed(context,RouteList.favourite);
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const FavouriteScreen(),
+                    ));
               },
             ),
             NavigationExpandedListItem(
