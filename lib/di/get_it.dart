@@ -29,6 +29,7 @@ import '../data/data_resources/movie_local_data_source.dart';
 import '../data/repositories/app_repository_impl.dart';
 import '../domain/usecases/che_if_fav.dart';
 import '../domain/usecases/get_preferred_language.dart';
+import '../domain/usecases/save_movie.dart';
 
 final getInstance = GetIt.I;
 
@@ -68,6 +69,7 @@ Future init() async {
   //     .registerLazySingleton<SearchMovies>(() => SearchMovies(getInstance()));
   getInstance.registerLazySingleton<CheckIfFavMovie>(
       () => CheckIfFavMovie(getInstance()));
+  getInstance.registerLazySingleton<SaveMovie>(() => SaveMovie(getInstance()));
   getInstance.registerLazySingleton<DeleteFavMovie>(
       () => DeleteFavMovie(getInstance()));
   getInstance

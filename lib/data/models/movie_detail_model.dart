@@ -38,7 +38,7 @@ class MovieDataModel extends MovieDetailEntity {
     this.backdropPath,
     this.belongsToCollection,
     this.budget,
-    this.genres,
+    // this.genres,
     this.homepage,
     required this.id,
     this.imdbId,
@@ -76,13 +76,13 @@ class MovieDataModel extends MovieDetailEntity {
           map['backdropPath'] != null ? map['backdropPath'] as String : null,
       belongsToCollection: map['belongsToCollection'] as dynamic,
       budget: map['budget'] != null ? map['budget'] as num : null,
-      genres: map['genres'] != null
-          ? List<Genres>.from(
-              (map['genres'] as List<int>).map<Genres?>(
-                (x) => Genres.fromJson(x as Map<String, dynamic>),
-              ),
-            )
-          : null,
+      // genres: map['genres'] != null
+      //     ? List<Genres>.from(
+      //         (map['genres'] as List<int>).map<Genres?>(
+      //           (x) => Genres.fromJson(x as Map<String, dynamic>),
+      //         ),
+      //       )
+      //     : null,
       homepage: map['homepage'] != null ? map['homepage'] as String : null,
       id: map['id'] != null ? map['id'] as num : 0.0,
       imdbId: map['imdbId'] != null ? map['imdbId'] as String : null,
@@ -93,7 +93,7 @@ class MovieDataModel extends MovieDetailEntity {
           map['originalTitle'] != null ? map['originalTitle'] as String : null,
       overview: map['overview'] != null ? map['overview'] as String : '',
       popularity: map['popularity'] != null ? map['popularity'] as num : null,
-      posterPath: map['posterPath'] as dynamic,
+      posterPath: map['posterPath'] != null ? map['posterPath'] as String : '',
       productionCompanies: map['productionCompanies'] != null
           ? List<ProductionCompanies>.from(
               (map['productionCompanies'] as List<int>)
@@ -133,7 +133,7 @@ class MovieDataModel extends MovieDetailEntity {
   String? backdropPath;
   dynamic belongsToCollection;
   num? budget;
-  List<Genres>? genres;
+  // List<Genres>? genres;
   String? homepage;
   num id;
   String? imdbId;
@@ -160,7 +160,7 @@ class MovieDataModel extends MovieDetailEntity {
     String? backdropPath,
     dynamic belongsToCollection,
     num? budget,
-    List<Genres>? genres,
+    // List<Genres>? genres,
     String? homepage,
     num? id,
     String? imdbId,
@@ -187,7 +187,7 @@ class MovieDataModel extends MovieDetailEntity {
         backdropPath: backdropPath ?? this.backdropPath,
         belongsToCollection: belongsToCollection ?? this.belongsToCollection,
         budget: budget ?? this.budget,
-        genres: genres ?? this.genres,
+        // genres: genres ?? this.genres,
         homepage: homepage ?? this.homepage,
         id: id ?? this.id,
         imdbId: imdbId ?? this.imdbId,
@@ -215,9 +215,9 @@ class MovieDataModel extends MovieDetailEntity {
     map['backdrop_path'] = backdropPath;
     map['belongs_to_collection'] = belongsToCollection;
     map['budget'] = budget;
-    if (genres != null) {
-      map['genres'] = genres?.map((v) => v.toJson()).toList();
-    }
+    // if (genres != null) {
+    //   map['genres'] = genres?.map((v) => v.toJson()).toList();
+    // }
     map['homepage'] = homepage;
     map['id'] = id;
     map['imdb_id'] = imdbId;

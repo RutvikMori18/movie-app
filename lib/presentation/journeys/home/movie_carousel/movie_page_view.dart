@@ -44,7 +44,7 @@ class _MoviePageViewState extends State<MoviePageView> {
       margin: EdgeInsets.symmetric(vertical: Sizes.dimen_10.h),
       height: ScreenUtil.screenHeight * 0.35,
       child: PageView.builder(
-        itemCount: widget.movies.length ?? 0,
+        itemCount: widget.movies.length,
         controller: _pageController,
         itemBuilder: (context, index) {
           final MovieEntity movie = widget.movies[index];

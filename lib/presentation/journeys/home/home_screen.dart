@@ -81,10 +81,13 @@ class _HomeScreenState extends State<HomeScreen> {
                         heightFactor: 0.6,
                         child: Placeholder(
                           color: Colors.grey,
+                          //For carousel widget
                           child: MovieCarouselWidget(
                               defaultIndex: 0, movies: state.movies),
                         ),
                       ),
+
+                      //for bottom tab
                       const FractionallySizedBox(
                           alignment: Alignment.bottomCenter,
                           heightFactor: 0.4,
@@ -93,11 +96,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   );
                 } else if (state is MovieCarouselError) {
                   return AppErrorWidget(
-                    errorType: state.errorType,
-                    onPressed: movieCarouselBloc.add(
-                      const CarouselLoadEvent(),
-                    ),
-                  );
+                      errorType: state.errorType,
+                      onPressed: () {
+                        movieCarouselBloc.add(
+                          const CarouselLoadEvent(),
+                        );
+                      });
                 }
 
                 return const SizedBox();

@@ -4,6 +4,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:movieapp/common/screen_util/screenutil.dart';
 import 'package:movieapp/di/get_it.dart';
 import 'package:movieapp/presentation/app_localizations.dart';
+import 'package:movieapp/presentation/journeys/home/home_screen.dart';
 import 'package:movieapp/presentation/themes/theme_color.dart';
 import 'package:movieapp/presentation/themes/theme_text.dart';
 import 'package:movieapp/presentation/wiredash_app.dart';
@@ -72,6 +73,7 @@ class _MovieAppState extends State<MovieApp> {
                   GlobalMaterialLocalizations.delegate,
                   GlobalWidgetsLocalizations.delegate,
                 ],
+                home: const HomeScreen(),
                 // initialRoute: RouteList.initial,
                 // builder: (context, child) {
                 //   return child ?? Container();

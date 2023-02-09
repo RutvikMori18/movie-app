@@ -39,9 +39,9 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
     movieDataBloc = getInstance<MovieDataBloc>();
     movieDataBloc
         .add(MovieDetailLoadEvent(widget.movieDetailArguments.movieID ?? 0));
-    castBloc = movieDataBloc.castBloc;
-    videoBloc = movieDataBloc.videoBloc;
-    favouriteBloc = movieDataBloc.favouriteBloc;
+    castBloc = getInstance<CastBloc>();
+    videoBloc = getInstance<GetVideoBloc>();
+    favouriteBloc = getInstance<FavouriteBloc>();
   }
 
   @override
@@ -100,7 +100,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                   ),
                 );
               } else if (state is MovieDataError) {
-                return Container();
+                return const CircularProgressIndicator();
               }
               return const SizedBox.shrink();
             },

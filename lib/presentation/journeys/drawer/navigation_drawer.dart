@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movieapp/common/extensions/size_extension.dart';
-import 'package:movieapp/common/extensions/string_extension.dart';
 import 'package:wiredash/wiredash.dart';
 
-import '../../../common/constants/language.dart';
 import '../../../common/constants/size_constants.dart';
 import '../../../common/constants/translation_constants.dart';
 import '../../widgets/app_dialog.dart';
 import '../../widgets/logo.dart';
 import '../favourite/favourite_screen.dart';
-import 'navigation_expansion_list_items.dart';
 import 'navigation_list_item.dart';
 
 class NavigationDrawer extends StatelessWidget {
@@ -42,7 +38,7 @@ class NavigationDrawer extends StatelessWidget {
               child: Logo(height: Sizes.dimen_20.h),
             ),
             NavigationListItem(
-              title: TranslationConstants.favoriteMovies.t(context),
+              title: TranslationConstants.favoriteMovies,
               onTap: () {
                 // Navigator.pushNamed(context,RouteList.favourite);
                 Navigator.push(
@@ -52,22 +48,23 @@ class NavigationDrawer extends StatelessWidget {
                     ));
               },
             ),
-            NavigationExpandedListItem(
-              title: TranslationConstants.language.t(context),
-              onTap: (index) {
-                BlocProvider.of(context).state;
-              },
-              children: Language.languages.map((e) => e.value).toList(),
-            ),
+            /*TODO : ADD LANGUAGE LIST TILE*/
+            // NavigationExpandedListItem(
+            //   title: TranslationConstants.language,
+            //   onTap: (index) {
+            //     BlocProvider.of(context).state;
+            //   },
+            //   children: Language.languages.map((e) => e.value).toList(),
+            // ),
             NavigationListItem(
-              title: TranslationConstants.feedback.t(context),
+              title: TranslationConstants.feedback,
               onTap: () {
                 Navigator.pop(context);
                 Wiredash.of(context).show();
               },
             ),
             NavigationListItem(
-              title: TranslationConstants.about.t(context),
+              title: TranslationConstants.about,
               onTap: () {
                 Navigator.of(context).pop();
                 _showDialog(context);

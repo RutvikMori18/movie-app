@@ -61,7 +61,7 @@ class _MovieTabbedWidgetState extends State<MovieTabbedWidget>
                 ],
               ),
               if (state is MovieTabbedChanged)
-                state.movies.isEmpty ?? true
+                state.movies.isEmpty
                     ? Expanded(
                         child: Center(
                           child: Text(
@@ -78,12 +78,13 @@ class _MovieTabbedWidgetState extends State<MovieTabbedWidget>
               if (state is MovieTabLoadError)
                 Expanded(
                   child: AppErrorWidget(
-                    errorType: state.errorType,
-                    onPressed: movieTabbedBloc.add(
-                      MovieTabChangedEvent(
-                          currentTabIndex: state.currentTabIndex),
-                    ),
-                  ),
+                      errorType: state.errorType,
+                      onPressed: () {
+                        movieTabbedBloc.add(
+                          MovieTabChangedEvent(
+                              currentTabIndex: state.currentTabIndex),
+                        );
+                      }),
                 ),
             ],
           ),

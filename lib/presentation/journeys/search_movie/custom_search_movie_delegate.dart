@@ -59,8 +59,10 @@ class CustomSearchDelegate extends SearchDelegate {
       builder: (context, state) {
         if (state is SearchMoviesError) {
           return AppErrorWidget(
-            onPressed: searchMoviesBloc
-                .add(SearchMovieDataChangeEvent(searchData: query)),
+            onPressed: () {
+              searchMoviesBloc
+                  .add(SearchMovieDataChangeEvent(searchData: query));
+            },
             errorType: state.errorType,
           );
         } else if (state is SearchMoviesDataState) {

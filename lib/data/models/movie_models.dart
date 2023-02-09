@@ -24,7 +24,7 @@ class MovieModel extends MovieEntity {
             id: id,
             title: title,
             backdropPath: backdropPath,
-            posterPath: posterPath ?? '',
+            posterPath: posterPath,
             releaseDate: releaseDate,
             voteAverage: voteAverage,
             overview: overview!);
@@ -54,8 +54,7 @@ class MovieModel extends MovieEntity {
             : List<int?>.from(json["genre_ids"]!.map((x) => x)),
         id: json["id"],
         originalTitle: json["original_title"],
-        originalLanguage:
-            originalLanguageValues!.map[json["original_language"]],
+        originalLanguage: originalLanguageValues.map[json["original_language"]],
         title: json["title"],
         backdropPath: json["backdrop_path"] ?? '',
         popularity: json["popularity"].toDouble(),
