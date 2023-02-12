@@ -46,7 +46,7 @@ class NavigationSubListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        onTap;
+        return onTap();
       },
       child: Container(
         decoration: BoxDecoration(

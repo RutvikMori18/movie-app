@@ -14,16 +14,16 @@ class AppLocalization {
 
   Map<String, String> _localizationStrings = {};
 
-  Future<bool> load() async {
+  Future load() async {
     final jsonString = await rootBundle
-        .loadString('assets/languages/${locale.languageCode}.json');
+        .loadString('assets/languages/${locale.languageCode.toString()}.json');
 
     final Map<String, dynamic> jsonMap = json.decode(jsonString);
 
     _localizationStrings =
         jsonMap.map((key, value) => MapEntry(key, value.toString()));
 
-    return true;
+    // return true;
   }
 
   String translate(String key) {

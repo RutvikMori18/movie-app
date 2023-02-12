@@ -6,6 +6,7 @@ import 'package:movieapp/data/core/api_constants.dart';
 import 'package:movieapp/domain/entities/movie_entity.dart';
 import 'package:movieapp/presentation/themes/theme_text.dart';
 
+import '../../../common/constants/route_constants.dart';
 import '../home/movie_detail/movie_detail_argument.dart';
 import '../home/movie_detail/movie_detail_screen.dart';
 
@@ -17,14 +18,16 @@ class SearchMovieCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
         onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => MovieDetailScreen(
-                movieDetailArguments: MovieDetailArguments(movieID: movie.id),
-              ),
-            ),
-          );
+          // Navigator.push(
+          //   context,
+          //   MaterialPageRoute(
+          //     builder: (context) => MovieDetailScreen(
+          //       movieDetailArguments: MovieDetailArguments(movieID: movie.id),
+          //     ),
+          //   ),
+          // );
+          Navigator.pushNamed(context, RouteList.movieDetail,
+              arguments: MovieDetailArguments(movieID: movie.id));
         },
         child: Padding(
           padding: EdgeInsets.symmetric(

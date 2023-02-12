@@ -1,10 +1,11 @@
+import '../../../common/constants/language.dart';
 import 'package:flutter/material.dart';
 
 import 'navigation_list_item.dart';
 
 class NavigationExpandedListItem extends StatelessWidget {
   final String title;
-  final Function onTap;
+  final Function(int) onTap;
   final List<String> children;
   const NavigationExpandedListItem(
       {Key? key,
@@ -31,7 +32,10 @@ class NavigationExpandedListItem extends StatelessWidget {
         ),
         children: [
           for (int i = 0; i < children.length; i++)
-            NavigationSubListItem(title: children[i], onTap: onTap(i)),
+            NavigationSubListItem(title: children[i], onTap: (){
+              print("middle screen ${Language.languages[i].code}");
+              onTap(i);
+            }),
         ],
       ),
     );

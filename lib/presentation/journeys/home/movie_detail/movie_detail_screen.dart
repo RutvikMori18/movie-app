@@ -58,55 +58,60 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
   Widget build(BuildContext context) {
     //bloc provider used for provide the bloc that will help to use the bloc its child widget
     return Scaffold(
-      body: MultiBlocProvider(
-        providers: [
-          BlocProvider.value(value: movieDataBloc),
-          BlocProvider.value(value: castBloc),
-          BlocProvider.value(value: videoBloc),
-          BlocProvider.value(value: favouriteBloc),
-        ],
-        child: BlocProvider<MovieDataBloc>.value(
-          value: movieDataBloc,
-          child: BlocBuilder<MovieDataBloc, MovieDataState>(
-            builder: (context, state) {
-              if (state is MovieDataLoaded) {
-                final MovieDetailEntity movieDetail = state.movieDetailEntity;
-                return SingleChildScrollView(
-                  scrollDirection: Axis.vertical,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      BigPoster(movie: movieDetail),
-                      Padding(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: Sizes.dimen_16.w,
-                            vertical: Sizes.dimen_8.h),
-                        child: Text(
-                          movieDetail.overview,
-                          style: Theme.of(context).textTheme.bodyText2,
-                        ),
-                      ),
-                      Padding(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: Sizes.dimen_16.w),
-                        child: Text(
-                          TranslationConstants.cast.t(context),
-                          style: Theme.of(context).textTheme.headline6,
-                        ),
-                      ),
-                      const CastWidget(),
-                    ],
-                  ),
-                );
-              } else if (state is MovieDataError) {
-                return const CircularProgressIndicator();
-              }
-              return const SizedBox.shrink();
-            },
-          ),
-        ),
-      ),
+      body:Container(
+        height: 500,
+        width: 300,
+        color: Colors.red
+          ,child: Center(child: Text("Hello world"))),
+      // body: MultiBlocProvider(
+      //   providers: [
+      //     BlocProvider.value(value: movieDataBloc),
+      //     BlocProvider.value(value: castBloc),
+      //     BlocProvider.value(value: videoBloc),
+      //     BlocProvider.value(value: favouriteBloc),
+      //   ],
+      //   child: BlocProvider<MovieDataBloc>.value(
+      //     value: movieDataBloc,
+      //     child: BlocBuilder<MovieDataBloc, MovieDataState>(
+      //       builder: (context, state) {
+      //         if (state is MovieDataLoaded) {
+      //           final MovieDetailEntity movieDetail = state.movieDetailEntity;
+      //           return SingleChildScrollView(
+      //             scrollDirection: Axis.vertical,
+      //             child: Column(
+      //               mainAxisSize: MainAxisSize.min,
+      //               crossAxisAlignment: CrossAxisAlignment.stretch,
+      //               children: [
+      //                 BigPoster(movie: movieDetail),
+      //                 Padding(
+      //                   padding: EdgeInsets.symmetric(
+      //                       horizontal: Sizes.dimen_16.w,
+      //                       vertical: Sizes.dimen_8.h),
+      //                   child: Text(
+      //                     movieDetail.overview,
+      //                     style: Theme.of(context).textTheme.bodyText2,
+      //                   ),
+      //                 ),
+      //                 Padding(
+      //                   padding:
+      //                       EdgeInsets.symmetric(horizontal: Sizes.dimen_16.w),
+      //                   child: Text(
+      //                     TranslationConstants.cast.t(context),
+      //                     style: Theme.of(context).textTheme.headline6,
+      //                   ),
+      //                 ),
+      //                 const CastWidget(),
+      //               ],
+      //             ),
+      //           );
+      //         } else if (state is MovieDataError) {
+      //           return const CircularProgressIndicator();
+      //         }
+      //         return const SizedBox.shrink();
+      //       },
+      //     ),
+      //   ),
+      // ),
     );
   }
 }

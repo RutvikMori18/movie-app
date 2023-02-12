@@ -5,6 +5,7 @@ import 'package:movieapp/common/screen_util/screenutil.dart';
 import 'package:movieapp/di/get_it.dart';
 import 'package:movieapp/presentation/app_localizations.dart';
 import 'package:movieapp/presentation/journeys/home/home_screen.dart';
+import 'package:movieapp/presentation/routes.dart';
 import 'package:movieapp/presentation/themes/theme_color.dart';
 import 'package:movieapp/presentation/themes/theme_text.dart';
 import 'package:movieapp/presentation/wiredash_app.dart';
@@ -13,6 +14,7 @@ import '../common/constants/language.dart';
 import '../common/constants/route_constants.dart';
 import 'blocs/loading/loading_bloc.dart';
 import 'blocs/movie_langauge/language_bloc.dart';
+import 'fade_page_route_builder.dart';
 import 'journeys/loading/loading_screen.dart';
 
 class MovieApp extends StatefulWidget {
@@ -20,12 +22,24 @@ class MovieApp extends StatefulWidget {
 
   @override
   State<MovieApp> createState() => _MovieAppState();
+  static void setLocale(BuildContext context, Locale newLocale) {
+    _MovieAppState state = context.findAncestorStateOfType<_MovieAppState>()!;
+    state.setLocale(newLocale);
+  }
 }
 
 class _MovieAppState extends State<MovieApp> {
   final _navigatorKey = GlobalKey<NavigatorState>();
   late LanguageBloc _languageBloc;
   late LoadingBloc loadingBloc;
+  Locale? _locale;
+
+
+  void setLocale(Locale locale) {
+    setState(() {
+      _locale = locale;
+    });
+  }
 
   @override
   void initState() {
@@ -83,7 +97,15 @@ class _MovieAppState extends State<MovieApp> {
                   GlobalMaterialLocalizations.delegate,
                   GlobalWidgetsLocalizations.delegate,
                 ],
-
+                localeResolutionCallback: (deviceLocal, supportedLocales) {
+                  for (var local in supportedLocales) {
+                    if (local.languageCode == deviceLocal!.languageCode &&
+                        local.countryCode == deviceLocal.countryCode) {
+                      return deviceLocal;
+                    }
+                  }
+                  return supportedLocales.first;
+                },
                 home: const HomeScreen(),
                 initialRoute: RouteList.initial,
                 // builder: (context, child) {

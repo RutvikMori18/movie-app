@@ -1,12 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movieapp/common/extensions/size_extension.dart';
+import 'package:movieapp/common/extensions/string_extension.dart';
+import 'package:movieapp/presentation/blocs/movie_langauge/language_bloc.dart';
+import 'package:movieapp/presentation/blocs/movie_langauge/language_bloc.dart';
 import 'package:wiredash/wiredash.dart';
 
+import '../../../common/constants/language.dart';
+import '../../../common/constants/route_constants.dart';
 import '../../../common/constants/size_constants.dart';
 import '../../../common/constants/translation_constants.dart';
+import '../../blocs/movie_langauge/language_bloc.dart';
 import '../../widgets/app_dialog.dart';
 import '../../widgets/logo.dart';
 import '../favourite/favourite_screen.dart';
+import 'navigation_expansion_list_items.dart';
 import 'navigation_list_item.dart';
 
 class NavigationDrawer extends StatelessWidget {
@@ -14,6 +22,8 @@ class NavigationDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return BlocBuilder<LanguageBloc, LanguageState>(
+  builder: (context, state) {
     return Container(
       width: Sizes.dimen_300.w,
       decoration: BoxDecoration(
@@ -38,33 +48,35 @@ class NavigationDrawer extends StatelessWidget {
               child: Logo(height: Sizes.dimen_20.h),
             ),
             NavigationListItem(
-              title: TranslationConstants.favoriteMovies,
+              title: TranslationConstants.favoriteMovies.t(context),
               onTap: () {
-                // Navigator.pushNamed(context,RouteList.favourite);
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const FavouriteScreen(),
-                    ));
+                Navigator.pushNamed(context,RouteList.favourite);
+                // Navigator.push(
+                //     context,
+                //     MaterialPageRoute(
+                //       builder: (context) => const FavouriteScreen(),
+                //     ));
               },
             ),
             /*TODO : ADD LANGUAGE LIST TILE*/
-            // NavigationExpandedListItem(
-            //   title: TranslationConstants.language,
-            //   onTap: (index) {
-            //     BlocProvider.of(context).state;
-            //   },
-            //   children: Language.languages.map((e) => e.value).toList(),
-            // ),
+            NavigationExpandedListItem(
+              title: TranslationConstants.language,
+              onTap: (index) {
+                print("check index $index");
+                BlocProvider.of<LanguageBloc>(context).add(ToggleLanguageEvent(Language.languages[index],));
+                BlocProvider.of<LanguageBloc>(context).state;
+              },
+              children: Language.languages.map((e) => e.value).toList(),
+            ),
             NavigationListItem(
-              title: TranslationConstants.feedback,
+              title: TranslationConstants.feedback.t(context),
               onTap: () {
                 Navigator.pop(context);
                 Wiredash.of(context).show();
               },
             ),
             NavigationListItem(
-              title: TranslationConstants.about,
+              title: TranslationConstants.about.t(context),
               onTap: () {
                 Navigator.of(context).pop();
                 _showDialog(context);
@@ -74,6 +86,8 @@ class NavigationDrawer extends StatelessWidget {
         ),
       ),
     );
+  },
+);
   }
 
   void _showDialog(BuildContext context) {
