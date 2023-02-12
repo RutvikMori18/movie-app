@@ -4,6 +4,7 @@ import 'package:movieapp/common/constants/translation_constants.dart';
 import 'package:movieapp/common/extensions/size_extension.dart';
 import 'package:movieapp/common/extensions/string_extension.dart';
 import 'package:movieapp/presentation/blocs/movie_tabbed/movie_tabbed_bloc.dart';
+import 'package:movieapp/presentation/journeys/loading/loading_circle.dart';
 
 import '../../../../common/constants/size_constants.dart';
 import '../../../widgets/app_error.dart';
@@ -86,6 +87,11 @@ class _MovieTabbedWidgetState extends State<MovieTabbedWidget>
                         );
                       }),
                 ),
+              if (state is MovieTabLoadingState)
+                Expanded(
+                    child: Center(
+                  child: LoadingCircle(size: Sizes.dimen_100.w),
+                ))
             ],
           ),
         );

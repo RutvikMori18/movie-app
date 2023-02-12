@@ -12,6 +12,7 @@ class CommonAPI {
       'Content-Type': 'application/json',
     });
 
+    await Future.delayed(const Duration(milliseconds: 2000));
     if (response.statusCode == 200) {
       final responseBody = jsonDecode(response.body);
 

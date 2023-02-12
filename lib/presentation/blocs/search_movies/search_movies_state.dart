@@ -12,6 +12,7 @@ class SearchMoviesInitial extends SearchMoviesState {
 class SearchMoviesDataState extends SearchMoviesState {
   final List<MovieEntity> result;
   const SearchMoviesDataState(this.result);
+
   @override
   List<Object> get props => [result];
 }

@@ -35,7 +35,6 @@ class MovieRepositoryImpl extends MovieRepository {
   Future<Either<AppError, List<MovieModel>>> getComingSoon() async {
     try {
       final movies = await remoteDataSource.getCommingSoon();
-      final movie;
       return Right(movies);
     } on SocketException {
       return const Left(AppError(AppErrorType.network));

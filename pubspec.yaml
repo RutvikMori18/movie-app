@@ -40,6 +40,7 @@ dependencies:
   http: ^0.13.5
   dartz: ^0.10.1
   get_it: ^7.2.0
+  flare_flutter: ^3.0.2
   google_fonts: ^3.0.1
   flutter_bloc: ^8.1.1
   flutter_svg: ^1.1.6
@@ -79,6 +80,7 @@ flutter:
     - assets/pngs/
     - assets/svgs/
     - assets/languages/
+    - assets/animations/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

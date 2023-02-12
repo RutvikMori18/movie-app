@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movieapp/common/constants/size_constants.dart';
 import 'package:movieapp/common/constants/translation_constants.dart';
 import 'package:movieapp/common/extensions/size_extension.dart';
-import 'package:movieapp/common/extensions/string_extension.dart';
 import 'package:movieapp/presentation/blocs/search_movies/search_movies_bloc.dart';
 import 'package:movieapp/presentation/journeys/search_movie/search_movie_card.dart';
 import 'package:movieapp/presentation/themes/theme_text.dart';
@@ -19,6 +18,7 @@ class CustomSearchDelegate extends SearchDelegate {
   @override
   ThemeData appBarTheme(BuildContext context) {
     return Theme.of(context).copyWith(
+      backgroundColor: Colors.transparent,
       inputDecorationTheme: InputDecorationTheme(
         hintStyle: Theme.of(context).textTheme.greySubtitle1,
       ),
@@ -70,7 +70,7 @@ class CustomSearchDelegate extends SearchDelegate {
             return Padding(
               padding: EdgeInsets.symmetric(horizontal: Sizes.dimen_16.w),
               child: Text(
-                TranslationConstants.noMoviesSearched.t(context),
+                TranslationConstants.noMoviesSearched,
                 textAlign: TextAlign.center,
               ),
             );

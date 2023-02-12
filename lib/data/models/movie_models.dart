@@ -45,7 +45,7 @@ class MovieModel extends MovieEntity {
   final double voteAverage;
 
   factory MovieModel.fromJson(Map<String, dynamic> json) => MovieModel(
-        posterPath: json["poster_path"],
+        posterPath: json["poster_path"] ?? '',
         adult: json["adult"],
         overview: json["overview"],
         releaseDate: json["release_date"],

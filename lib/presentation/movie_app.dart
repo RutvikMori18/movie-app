@@ -10,7 +10,10 @@ import 'package:movieapp/presentation/themes/theme_text.dart';
 import 'package:movieapp/presentation/wiredash_app.dart';
 
 import '../common/constants/language.dart';
+import '../common/constants/route_constants.dart';
+import 'blocs/loading/loading_bloc.dart';
 import 'blocs/movie_langauge/language_bloc.dart';
+import 'journeys/loading/loading_screen.dart';
 
 class MovieApp extends StatefulWidget {
   const MovieApp({Key? key}) : super(key: key);
@@ -22,6 +25,7 @@ class MovieApp extends StatefulWidget {
 class _MovieAppState extends State<MovieApp> {
   final _navigatorKey = GlobalKey<NavigatorState>();
   late LanguageBloc _languageBloc;
+  late LoadingBloc loadingBloc;
 
   @override
   void initState() {
@@ -32,6 +36,7 @@ class _MovieAppState extends State<MovieApp> {
     AppLocalization(const Locale('en'));
     _languageBloc = getInstance<LanguageBloc>();
     _languageBloc.add(LoadPreferredEvent());
+    loadingBloc = getInstance<LoadingBloc>();
   }
 
   @override
@@ -39,12 +44,17 @@ class _MovieAppState extends State<MovieApp> {
     // TODO: implement dispose
     super.dispose();
     _languageBloc.close();
+    loadingBloc.close();
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<LanguageBloc>.value(
-      value: _languageBloc,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<LanguageBloc>.value(value: _languageBloc),
+        BlocProvider<LoadingBloc>.value(value: loadingBloc),
+      ],
+
       child: BlocBuilder<LanguageBloc, LanguageState>(
         builder: (context, state) {
           if (state is LanguageLoaded) {
@@ -73,9 +83,11 @@ class _MovieAppState extends State<MovieApp> {
                   GlobalMaterialLocalizations.delegate,
                   GlobalWidgetsLocalizations.delegate,
                 ],
+
                 home: const HomeScreen(),
-                // initialRoute: RouteList.initial,
+                initialRoute: RouteList.initial,
                 // builder: (context, child) {
+                //   LoadingScreen(screen: child,),
                 //   return child ?? Container();
                 // },
                 // onGenerateRoute: (RouteSettings setting) {
