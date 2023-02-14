@@ -1,40 +1,25 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:convert';
+// To parse this JSON data, do
+//
+//     final movieModel = movieModelFromJson(jsonString);
 
 import 'package:movieapp/domain/entities/movie_entity.dart';
 
 class MovieModel extends MovieEntity {
-  final int id;
-  final bool? video;
-  final int? votCount;
-  final double voteAverage;
-  final String title;
-  final String releaseDate;
-  final String? originalLanguage;
-  final String? originalTitle;
-  final List<int>? genereIds;
-  final String backdropPath;
-  final bool? adult;
-  final String? overview;
-  final String posterPath;
-  final double? popularity;
-  final String? mediaType;
   MovieModel({
-    required this.id,
-    required this.video,
-    required this.votCount,
-    required this.voteAverage,
-    required this.title,
-    required this.releaseDate,
-    required this.originalLanguage,
-    required this.originalTitle,
-    required this.genereIds,
-    required this.backdropPath,
+    required this.posterPath,
     required this.adult,
     required this.overview,
-    required this.posterPath,
+    required this.releaseDate,
+    required this.genreIds,
+    required this.id,
+    required this.originalTitle,
+    required this.originalLanguage,
+    required this.title,
+    required this.backdropPath,
     required this.popularity,
-    required this.mediaType,
+    required this.voteCount,
+    required this.video,
+    required this.voteAverage,
   }) : super(
             id: id,
             title: title,
@@ -44,125 +29,71 @@ class MovieModel extends MovieEntity {
             voteAverage: voteAverage,
             overview: overview!);
 
-  MovieModel copyWith({
-    int? id,
-    bool? video,
-    int? votCount,
-    double? voteAverage,
-    String? title,
-    String? releaseDate,
-    String? originalLanguage,
-    String? originalTitle,
-    String? backdropPath,
-    bool? adult,
-    String? overview,
-    String? posterPath,
-    double? popularity,
-    String? mediaType,
-  }) {
-    return MovieModel(
-      id: id ?? this.id,
-      video: video ?? this.video,
-      votCount: votCount ?? this.votCount,
-      voteAverage: voteAverage ?? this.voteAverage,
-      title: title ?? this.title,
-      releaseDate: releaseDate ?? this.releaseDate,
-      originalLanguage: originalLanguage ?? this.originalLanguage,
-      originalTitle: originalTitle ?? this.originalTitle,
-      backdropPath: backdropPath ?? this.backdropPath,
-      adult: adult ?? this.adult,
-      overview: overview ?? this.overview,
-      posterPath: posterPath ?? this.posterPath,
-      popularity: popularity ?? this.popularity,
-      mediaType: mediaType ?? this.mediaType,
-      genereIds: [],
-    );
-  }
+  final String posterPath;
+  final bool? adult;
+  final String? overview;
+  final String releaseDate;
+  final List<int?>? genreIds;
+  final int id;
+  final String? originalTitle;
+  final OriginalLanguage? originalLanguage;
+  final String title;
+  final String backdropPath;
+  final double? popularity;
+  final int? voteCount;
+  final bool? video;
+  final double voteAverage;
 
-  Map<String, dynamic> toMap() {
-    return <String, dynamic>{
-      'id': id,
-      'video': video,
-      'votCount': votCount,
-      'voteAverage': voteAverage,
-      'title': title,
-      'releaseDate': releaseDate,
-      'originalLanguage': originalLanguage,
-      'originalTitle': originalTitle,
-      'backdropPath': backdropPath,
-      'adult': adult,
-      'overview': overview,
-      'posterPath': posterPath,
-      'popularity': popularity,
-      'mediaType': mediaType,
-    };
-  }
+  factory MovieModel.fromJson(Map<String, dynamic> json) => MovieModel(
+        posterPath: json["poster_path"] ?? '',
+        adult: json["adult"],
+        overview: json["overview"],
+        releaseDate: json["release_date"],
+        genreIds: json["genre_ids"] == null
+            ? []
+            : List<int?>.from(json["genre_ids"]!.map((x) => x)),
+        id: json["id"],
+        originalTitle: json["original_title"],
+        originalLanguage: originalLanguageValues.map[json["original_language"]],
+        title: json["title"],
+        backdropPath: json["backdrop_path"] ?? '',
+        popularity: json["popularity"].toDouble(),
+        voteCount: json["vote_count"],
+        video: json["video"],
+        voteAverage: json["vote_average"].toDouble(),
+      );
 
-  factory MovieModel.fromMap(Map<String, dynamic> map) {
-    return MovieModel(
-      id: map['id'] ?? 0,
-      video: map['video'],
-      votCount: map['votCount'] ?? 0,
-      voteAverage: map['voteAverage'] ?? 0.0,
-      title: map['title'] ?? '',
-      releaseDate: map['releaseDate'] ?? '',
-      originalLanguage: map['originalLanguage'] ?? '',
-      originalTitle: map['originalTitle'] ?? '',
-      backdropPath: map['backdropPath'] ?? '',
-      adult: map['adult'] ?? false,
-      overview: map['overview'],
-      posterPath: map['posterPath'] ?? '',
-      popularity: map['popularity'] ?? 0.0,
-      mediaType: map['mediaType'],
-      genereIds: map['genereIds'] ?? [],
-    );
-  }
+  Map<String, dynamic> toJson() => {
+        "poster_path": posterPath,
+        "adult": adult,
+        "overview": overview,
+        "release_date": releaseDate,
+        "genre_ids":
+            genreIds == null ? [] : List<dynamic>.from(genreIds!.map((x) => x)),
+        "id": id,
+        "original_title": originalTitle,
+        "original_language": originalLanguageValues.reverse![originalLanguage],
+        "title": title,
+        "backdrop_path": backdropPath,
+        "popularity": popularity,
+        "vote_count": voteCount,
+        "video": video,
+        "vote_average": voteAverage,
+      };
+}
 
-  String toJson() => json.encode(toMap());
+enum OriginalLanguage { EN }
 
-  factory MovieModel.fromJson(String source) =>
-      MovieModel.fromMap(json.decode(source) as Map<String, dynamic>);
+final originalLanguageValues = EnumValues({"en": OriginalLanguage.EN});
 
-  @override
-  String toString() {
-    return 'Results(id: $id, video: $video, votCount: $votCount, voteAverage: $voteAverage, title: $title, releaseDate: $releaseDate, originalLanguage: $originalLanguage, originalTitle: $originalTitle, backdropPath: $backdropPath, adult: $adult, overview: $overview, posterPath: $posterPath, popularity: $popularity, mediaType: $mediaType)';
-  }
+class EnumValues<T> {
+  Map<String, T> map;
+  Map<T, String>? reverseMap;
 
-  @override
-  bool operator ==(covariant MovieModel other) {
-    if (identical(this, other)) return true;
+  EnumValues(this.map);
 
-    return other.id == id &&
-        other.video == video &&
-        other.votCount == votCount &&
-        other.voteAverage == voteAverage &&
-        other.title == title &&
-        other.releaseDate == releaseDate &&
-        other.originalLanguage == originalLanguage &&
-        other.originalTitle == originalTitle &&
-        other.backdropPath == backdropPath &&
-        other.adult == adult &&
-        other.overview == overview &&
-        other.posterPath == posterPath &&
-        other.popularity == popularity &&
-        other.mediaType == mediaType;
-  }
-
-  @override
-  int get hashCode {
-    return id.hashCode ^
-        video.hashCode ^
-        votCount.hashCode ^
-        voteAverage.hashCode ^
-        title.hashCode ^
-        releaseDate.hashCode ^
-        originalLanguage.hashCode ^
-        originalTitle.hashCode ^
-        backdropPath.hashCode ^
-        adult.hashCode ^
-        overview.hashCode ^
-        posterPath.hashCode ^
-        popularity.hashCode ^
-        mediaType.hashCode;
+  Map<T, String>? get reverse {
+    reverseMap ??= map.map((k, v) => MapEntry(v, k));
+    return reverseMap;
   }
 }
