@@ -5,16 +5,14 @@ import '../../../common/constants/size_constants.dart';
 
 class NavigationListItem extends StatelessWidget {
   final String title;
-  final Function onTap;
+  final void Function() onTap;
   const NavigationListItem({Key? key, required this.title, required this.onTap})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        onTap;
-      },
+      onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
           boxShadow: [
@@ -45,9 +43,7 @@ class NavigationSubListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        return onTap();
-      },
+      onTap: onTap(),
       child: Container(
         decoration: BoxDecoration(
           boxShadow: [

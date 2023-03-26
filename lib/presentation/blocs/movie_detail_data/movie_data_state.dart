@@ -22,7 +22,7 @@ class MovieDataError extends MovieDataState {
 class MovieDataLoaded extends MovieDataState {
   final MovieDetailEntity movieDetailEntity;
   //state will call the events
-  const MovieDataLoaded(this.movieDetailEntity);
+  const MovieDataLoaded({required this.movieDetailEntity});
   @override
   List<Object> get props => [movieDetailEntity];
 }

@@ -2,13 +2,13 @@ import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:movieapp/domain/entities/app_error.dart';
-import 'package:movieapp/domain/entities/movie_detail_entity.dart';
 import 'package:movieapp/domain/entities/movie_params.dart';
 import 'package:movieapp/domain/usecases/get_movie_detail.dart';
 import 'package:movieapp/presentation/blocs/favourite/favourite_bloc.dart';
 import 'package:movieapp/presentation/blocs/get_videos/get_video_bloc.dart';
 import 'package:movieapp/presentation/blocs/loading/loading_bloc.dart';
 
+import '../../../domain/entities/movie_detail_entity.dart';
 import '../cast/cast_bloc.dart';
 
 part 'movie_data_event.dart';
@@ -48,7 +48,9 @@ class MovieDataBloc extends Bloc<MovieDataEvent, MovieDataState> {
         //bloc will call the state
         return eitherResponse.fold(
           (l) => MovieDataError(),
-          (r) => MovieDataLoaded(r),
+          (r) => MovieDataLoaded(
+            movieDetailEntity: r,
+          ),
         );
       }
     });

@@ -22,16 +22,16 @@ class VideoWidget extends StatelessWidget {
           return Button(
             text: TranslationConstants.watchTrailers,
             onPressed: () {
-              Navigator.pushNamed(context,RouteList.watchTrailer,
-                  arguments: WatchVideoArguments(videos: video));
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(
-              //     builder: (context) => WatchVideoScreen(
-              //       arguments: WatchVideoArguments(videos: video),
-              //     ),
-              //   ),
-              // );
+              // Navigator.pushNamed(context,RouteList.watchTrailer,
+              //     arguments: WatchVideoArguments(videos: video));
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => WatchVideoScreen(
+                    arguments: WatchVideoArguments(videos: video),
+                  ),
+                ),
+              );
             },
           );
         } else if (state is NoVideosState) {

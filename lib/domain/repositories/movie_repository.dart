@@ -1,9 +1,10 @@
 import 'package:dartz/dartz.dart';
+
 import 'package:movieapp/domain/entities/app_error.dart';
 import 'package:movieapp/domain/entities/cast_entity.dart';
-import 'package:movieapp/domain/entities/movie_detail_entity.dart';
 import 'package:movieapp/domain/entities/movie_entity.dart';
 
+import '../entities/movie_detail_entity.dart';
 import '../entities/video_entity.dart';
 
 abstract class MovieRepository {
