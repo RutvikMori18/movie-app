@@ -23,7 +23,8 @@ class LanguageBloc extends Bloc<LanguageEvent, LanguageState> {
         emit(LanguageLoaded(Locale(event.languageEntity.code)));
       } else if (event is LoadPreferredEvent) {
         final response = await getPreferredLanguage(NoParams());
-        response.fold((l) => LanguageError(), (r) => LanguageLoaded(Locale(r)));
+        response.fold((l) => emit(LanguageError()),
+            (r) => emit(LanguageLoaded(Locale(r))));
       }
     });
   }

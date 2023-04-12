@@ -31,7 +31,7 @@ class BigPoster extends StatelessWidget {
           ),
           child: CachedNetworkImage(
             imageUrl: '${ApiConstants.baseImageUrl}${movie.posterPath}',
-            // fit: BoxFit.cover,
+            fit: BoxFit.cover,
             width: ScreenUtil.screenWidth,
           ),
         ),

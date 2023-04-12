@@ -72,6 +72,7 @@ class _HomeScreenState extends State<HomeScreen> {
           body: BlocBuilder<MovieCarouselBloc, MovieCarouselState>(
               bloc: movieCarouselBloc,
               builder: (context, state) {
+                print('state in home screen-------$state');
                 if (state is MovieCarouselELoaded) {
                   return Stack(
                     fit: StackFit.expand,
@@ -97,11 +98,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 } else if (state is MovieCarouselError) {
                   return AppErrorWidget(
                       errorType: state.errorType,
-                      onPressed: () {
-                        movieCarouselBloc.add(
-                          const CarouselLoadEvent(),
-                        );
-                      });
+                      onPressed: () => movieCarouselBloc.add(
+                            const CarouselLoadEvent(),
+                          ));
                 }
 
                 return const SizedBox();

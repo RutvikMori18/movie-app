@@ -5,6 +5,7 @@ import 'package:movieapp/common/constants/size_constants.dart';
 import 'package:movieapp/common/extensions/size_extension.dart';
 import 'package:movieapp/domain/entities/movie_entity.dart';
 import 'package:movieapp/presentation/blocs/favourite/favourite_bloc.dart';
+import 'package:movieapp/presentation/blocs/loading/loading_bloc.dart';
 
 import '../../../data/core/api_constants.dart';
 import '../home/movie_detail/movie_detail_argument.dart';
@@ -17,6 +18,7 @@ class FavouriteMovieCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('favourite movie path---${movie.posterPath}');
     return Container(
       padding: EdgeInsets.only(bottom: Sizes.dimen_8.h),
       decoration: BoxDecoration(
@@ -39,19 +41,19 @@ class FavouriteMovieCardWidget extends StatelessWidget {
           child: Stack(
             children: [
               CachedNetworkImage(
+                // imageUrl: '${ApiConstants.baseImageUrl}${movie.posterPath}',
                 imageUrl: '${ApiConstants.baseImageUrl}${movie.posterPath}',
               ),
               Align(
                 alignment: Alignment.topRight,
-                child: InkWell(
-                  onTap: () => BlocProvider.of<FavouriteBloc>(context).add(
-                    DeleteFavouriteMovieEvent(movie.id),
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.all(Sizes.dimen_12.w),
-                    child: IconButton(
-                        onPressed: () {}, icon: const Icon(Icons.delete)),
-                  ),
+                child: Padding(
+                  padding: EdgeInsets.all(Sizes.dimen_12.w),
+                  child: IconButton(
+                      onPressed: () {
+                        BlocProvider.of<FavouriteBloc>(context)
+                            .add(DeleteFavouriteMovieEvent(movie.id));
+                      },
+                      icon: const Icon(Icons.delete)),
                 ),
               )
             ],

@@ -8,9 +8,9 @@ class LoadingBloc extends Bloc<LoadingEvent, LoadingState> {
   LoadingBloc() : super(LoadingInitial()) {
     on<LoadingEvent>((event, emit) {
       if (event is StartLoading) {
-        return LoadingStartedState();
+        return emit(LoadingStartedState());
       } else if (event is FinishLoading) {
-        return LoadingFinishState();
+        return emit(LoadingFinishState());
       }
     });
   }

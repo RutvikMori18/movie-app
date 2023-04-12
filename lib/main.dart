@@ -49,18 +49,18 @@ Future<void> main() async {
   //   //show null data
   // }*/
 
-  GetTrending getTrending = get_it.getInstance<GetTrending>();
-
-  final Either<AppError, List<MovieEntity>> result =
-      await getTrending(NoParams());
-  result.fold(
-    (l) {
-      print('error ->$l');
-    },
-    (r) {
-      print('List of Movies ->$r');
-    },
-  );
+  // GetTrending getTrending = get_it.getInstance<GetTrending>();
+  //
+  // final Either<AppError, List<MovieEntity>> result =
+  //     await getTrending(NoParams());
+  // result.fold(
+  //   (l) {
+  //     print('error ->$l');
+  //   },
+  //   (r) {
+  //     print('List of Movies ->$r');
+  //   },
+  // );
   final appDocumentDir = await getApplicationDocumentsDirectory();
   Hive.init(appDocumentDir.path);
   //external file register with adapter

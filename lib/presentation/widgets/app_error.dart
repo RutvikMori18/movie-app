@@ -25,7 +25,7 @@ class AppErrorWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(
-            errorType.name == AppErrorType.api
+            errorType == AppErrorType.api
                 ? TranslationConstants.somethingWentWrong.t(context)
                 : TranslationConstants.checkNetwork.t(context),
             textAlign: TextAlign.center,

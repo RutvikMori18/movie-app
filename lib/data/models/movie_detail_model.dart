@@ -47,12 +47,12 @@ class MovieDataModel extends MovieDetailEntity {
     required this.overview,
     this.popularity,
     required this.posterPath,
-    this.productionCompanies,
-    this.productionCountries,
+    // this.productionCompanies,
+    // this.productionCountries,
     required this.releaseDate,
     this.revenue,
     this.runtime,
-    this.spokenLanguages,
+    // this.spokenLanguages,
     this.status,
     this.tagline,
     required this.title,
@@ -66,15 +66,18 @@ class MovieDataModel extends MovieDetailEntity {
           voteAverage: voteAverage,
           releaseDate: releaseDate,
           posterPath: posterPath,
-          backDropPath: backdropPath ?? '',
+          backDropPath: backdropPath ??
+              "https://img.freepik.com/free-vector/404-error-with-landscape-concept-illustration_114360-7888.jpg?w=2000",
         );
 
   factory MovieDataModel.fromJson(Map<String, dynamic> map) {
     return MovieDataModel(
       adult: map['adult'] != null ? map['adult'] as bool : null,
-      backdropPath:
-          map['backdropPath'] != null ? map['backdropPath'] as String : null,
-      belongsToCollection: map['belongsToCollection'] as dynamic,
+      backdropPath: map['backdrop_path'] != null
+          ? map['backdrop_path'] as String
+          : "https://img.freepik.com/free-vector/404-error-with-landscape-concept-illustration_114360-7888.jpg?w=2000",
+
+      belongsToCollection: map['belongs_to_Collection'] as dynamic,
       budget: map['budget'] != null ? map['budget'] as num : null,
       // genres: map['genres'] != null
       //     ? List<Genres>.from(
@@ -85,48 +88,51 @@ class MovieDataModel extends MovieDetailEntity {
       //     : null,
       homepage: map['homepage'] != null ? map['homepage'] as String : null,
       id: map['id'] != null ? map['id'] as num : 0.0,
-      imdbId: map['imdbId'] != null ? map['imdbId'] as String : null,
-      originalLanguage: map['originalLanguage'] != null
-          ? map['originalLanguage'] as String
+      imdbId: map['imdb_id'] != null ? map['imdb_id'] as String : null,
+      originalLanguage: map['original_language'] != null
+          ? map['original_language'] as String
           : null,
-      originalTitle:
-          map['originalTitle'] != null ? map['originalTitle'] as String : null,
+      originalTitle: map['original_title'] != null
+          ? map['original_title'] as String
+          : null,
       overview: map['overview'] != null ? map['overview'] as String : '',
       popularity: map['popularity'] != null ? map['popularity'] as num : null,
-      posterPath: map['posterPath'] != null ? map['posterPath'] as String : '',
-      productionCompanies: map['productionCompanies'] != null
+      posterPath:
+          map['poster_path'] != null ? map['poster_path'] as String : '',
+      /* productionCompanies: map['production_companies'] != null
           ? List<ProductionCompanies>.from(
-              (map['productionCompanies'] as List<int>)
+              (map['production_companies'] as List<int>)
                   .map<ProductionCompanies?>(
                 (x) => ProductionCompanies.fromJson(x as Map<String, dynamic>),
               ),
             )
-          : null,
-      productionCountries: map['productionCountries'] != null
+          : null,*/
+      /* productionCountries: map['production_countries'] != null
           ? List<ProductionCountries>.from(
-              (map['productionCountries'] as List<int>)
+              (map['production_countries'] as List<int>)
                   .map<ProductionCountries?>(
                 (x) => ProductionCountries.fromJson(x as Map<String, dynamic>),
               ),
             )
-          : null,
+          : null,*/
       releaseDate:
-          map['releaseDate'] != null ? map['releaseDate'] as String : '',
+          map['release_date'] != null ? map['release_date'] as String : '',
       revenue: map['revenue'] != null ? map['revenue'] as num : null,
       runtime: map['runtime'] != null ? map['runtime'] as num : null,
-      spokenLanguages: map['spokenLanguages'] != null
+      /*     spokenLanguages: map['spoken_languages'] != null
           ? List<SpokenLanguages>.from(
-              (map['spokenLanguages'] as List<int>).map<SpokenLanguages?>(
+              (map['spoken_languages'] as List<int>).map<SpokenLanguages?>(
                 (x) => SpokenLanguages.fromJson(x as Map<String, dynamic>),
               ),
             )
-          : null,
+          : null,*/
       status: map['status'] != null ? map['status'] as String : null,
       tagline: map['tagline'] != null ? map['tagline'] as String : null,
       title: map['title'] != null ? map['title'] as String : '',
       video: map['video'] != null ? map['video'] as bool : null,
-      voteAverage: map['voteAverage'] != null ? map['voteAverage'] as num : 0.0,
-      voteCount: map['voteCount'] != null ? map['voteCount'] as num : null,
+      voteAverage:
+          map['vote_average'] != null ? map['vote_average'] as num : 0.0,
+      voteCount: map['vote_count'] != null ? map['vote_count'] as num : null,
     );
   }
   bool? adult;
@@ -142,12 +148,12 @@ class MovieDataModel extends MovieDetailEntity {
   String overview;
   num? popularity;
   String posterPath;
-  List<ProductionCompanies>? productionCompanies;
-  List<ProductionCountries>? productionCountries;
+  // List<ProductionCompanies>? productionCompanies;
+  // List<ProductionCountries>? productionCountries;
   String releaseDate;
   num? revenue;
   num? runtime;
-  List<SpokenLanguages>? spokenLanguages;
+  // List<SpokenLanguages>? spokenLanguages;
   String? status;
   String? tagline;
   String title;
@@ -169,12 +175,12 @@ class MovieDataModel extends MovieDetailEntity {
     String? overview,
     num? popularity,
     dynamic posterPath,
-    List<ProductionCompanies>? productionCompanies,
-    List<ProductionCountries>? productionCountries,
+    // List<ProductionCompanies>? productionCompanies,
+    // List<ProductionCountries>? productionCountries,
     String? releaseDate,
     num? revenue,
     num? runtime,
-    List<SpokenLanguages>? spokenLanguages,
+    // List<SpokenLanguages>? spokenLanguages,
     String? status,
     String? tagline,
     String? title,
@@ -196,12 +202,12 @@ class MovieDataModel extends MovieDetailEntity {
         overview: overview ?? this.overview,
         popularity: popularity ?? this.popularity,
         posterPath: posterPath ?? this.posterPath,
-        productionCompanies: productionCompanies ?? this.productionCompanies,
-        productionCountries: productionCountries ?? this.productionCountries,
+        // productionCompanies: productionCompanies ?? this.productionCompanies,
+        // productionCountries: productionCountries ?? this.productionCountries,
         releaseDate: releaseDate ?? this.releaseDate,
         revenue: revenue ?? this.revenue,
         runtime: runtime ?? this.runtime,
-        spokenLanguages: spokenLanguages ?? this.spokenLanguages,
+        // spokenLanguages: spokenLanguages ?? this.spokenLanguages,
         status: status ?? this.status,
         tagline: tagline ?? this.tagline,
         title: title ?? this.title,
@@ -226,21 +232,21 @@ class MovieDataModel extends MovieDetailEntity {
     map['overview'] = overview;
     map['popularity'] = popularity;
     map['poster_path'] = posterPath;
-    if (productionCompanies != null) {
-      map['production_companies'] =
-          productionCompanies?.map((v) => v.toJson()).toList();
-    }
-    if (productionCountries != null) {
-      map['production_countries'] =
-          productionCountries?.map((v) => v.toJson()).toList();
-    }
+    // if (productionCompanies != null) {
+    //   map['production_companies'] =
+    //       productionCompanies?.map((v) => v.toJson()).toList();
+    // }
+    // if (productionCountries != null) {
+    //   map['production_countries'] =
+    //       productionCountries?.map((v) => v.toJson()).toList();
+    // }
     map['release_date'] = releaseDate;
     map['revenue'] = revenue;
     map['runtime'] = runtime;
-    if (spokenLanguages != null) {
-      map['spoken_languages'] =
-          spokenLanguages?.map((v) => v.toJson()).toList();
-    }
+    // if (spokenLanguages != null) {
+    //   map['spoken_languages'] =
+    //       spokenLanguages?.map((v) => v.toJson()).toList();
+    // }
     map['status'] = status;
     map['tagline'] = tagline;
     map['title'] = title;

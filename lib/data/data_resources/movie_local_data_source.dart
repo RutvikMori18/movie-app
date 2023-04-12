@@ -25,11 +25,12 @@ class MovieLocaleDataSourceImpl extends MovieLocalDataSource {
   @override
   Future<List<MovieTable>> getMovie() async {
     final movieBox = await Hive.openBox('movieBox');
-    final movieIds = movieBox.keys;
+    final Iterable movieIds = movieBox.values;
+    print("Movieidsss-----${movieIds}");
     List<MovieTable> movies = [];
-    movieIds.forEach((element) {
+    for (var element in movieIds) {
       movies.add(element);
-    });
+    }
     return movies;
   }
 

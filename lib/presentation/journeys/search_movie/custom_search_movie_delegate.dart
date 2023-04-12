@@ -19,8 +19,9 @@ class CustomSearchDelegate extends SearchDelegate {
   ThemeData appBarTheme(BuildContext context) {
     return Theme.of(context).copyWith(
       backgroundColor: Colors.transparent,
+      appBarTheme: AppBarTheme.of(context).copyWith(color: Colors.transparent),
       inputDecorationTheme: InputDecorationTheme(
-        hintStyle: Theme.of(context).textTheme.greySubtitle1,
+        hintStyle: Theme.of(context).textTheme.bodyText2,
       ),
     );
   }
@@ -69,7 +70,7 @@ class CustomSearchDelegate extends SearchDelegate {
           if (state.result.isEmpty) {
             return Padding(
               padding: EdgeInsets.symmetric(horizontal: Sizes.dimen_16.w),
-              child: Text(
+              child: const Text(
                 TranslationConstants.noMoviesSearched,
                 textAlign: TextAlign.center,
               ),
@@ -82,7 +83,7 @@ class CustomSearchDelegate extends SearchDelegate {
             itemCount: state.result.length,
           );
         } else {
-          return SizedBox.shrink();
+          return const SizedBox.shrink();
         }
       },
     );

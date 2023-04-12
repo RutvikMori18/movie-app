@@ -31,24 +31,24 @@ class FavouriteBloc extends Bloc<FavouriteEvent, FavouriteState> {
         }
         final response = await checkIfFavMovie(event.movieEntity.id);
 
-        return response.fold(
-            (l) => FavouriteMovieErrorState(), (r) => IsFavouriteMovieState(r));
+        return response.fold((l) => emit(FavouriteMovieErrorState()),
+            (r) => emit(IsFavouriteMovieState(r)));
       } else if (event is LoadFavMovieEvent) {
         final response = await getFavMovies(NoParams());
 
-        return response.fold((l) => FavouriteMovieErrorState(),
-            (r) => FavouriteMovieLoadedState(r));
+        return response.fold((l) => emit(FavouriteMovieErrorState()),
+            (r) => emit(FavouriteMovieLoadedState(r)));
       } else if (event is DeleteFavouriteMovieEvent) {
         await deleteFavMovie(event.movieId);
         final response = await getFavMovies(NoParams());
 
-        return response.fold((l) => FavouriteMovieErrorState(),
-            (r) => FavouriteMovieLoadedState(r));
+        return response.fold((l) => emit(FavouriteMovieErrorState()),
+            (r) => emit(FavouriteMovieLoadedState(r)));
       } else if (event is CheckIfFavouriteMovieEvent) {
         final response = await checkIfFavMovie(event.movieId);
 
-        return response.fold((l) => FavouriteMovieErrorState(),
-            (r) => CheckIfFavouriteMovieEvent(event.movieId));
+        return response.fold((l) => emit(FavouriteMovieErrorState()),
+            (r) => (CheckIfFavouriteMovieEvent(event.movieId)));
       }
     });
   }

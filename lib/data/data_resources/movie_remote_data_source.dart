@@ -66,7 +66,7 @@ class MovieRemoteDataSourceImpl extends MovieRemoteDataSource {
     final Map<String, dynamic> response = await CommonAPI().getApi('movie/$id');
 
     final MovieDataModel movie = MovieDataModel.fromJson(response);
-    print(movie);
+    // print(movie);
     return movie;
   }
 

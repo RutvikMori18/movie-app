@@ -35,6 +35,7 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.transparent,
         title: Text(TranslationConstants.favoriteMovies.t(context)),
       ),
       body: BlocProvider.value(
@@ -43,10 +44,12 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
           builder: (context, state) {
             if (state is FavouriteMovieLoadedState) {
               if (state.movies.isEmpty) {
-                return Text(
-                  TranslationConstants.noFavoriteMovie.t(context),
-                  style: Theme.of(context).textTheme.subtitle1,
-                  textAlign: TextAlign.center,
+                return Center(
+                  child: Text(
+                    TranslationConstants.noFavoriteMovie.t(context),
+                    style: Theme.of(context).textTheme.subtitle1,
+                    textAlign: TextAlign.center,
+                  ),
                 );
               }
               return FavouriteMovieGridWidget(

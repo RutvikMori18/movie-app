@@ -18,8 +18,8 @@ class GetVideoBloc extends Bloc<GetVideoEvent, GetVideoState> {
         final Either<AppError, List<VideoEntity>> eitherResponse =
             await getVideos(MovieParams(event.movieId));
 
-        return eitherResponse.fold(
-            (l) => NoVideosState(), (r) => VideoLoadedState(videos: r));
+        return eitherResponse.fold((l) => emit(NoVideosState()),
+            (r) => emit(VideoLoadedState(videos: r)));
       }
     });
   }

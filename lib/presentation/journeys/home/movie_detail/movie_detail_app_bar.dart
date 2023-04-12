@@ -12,7 +12,7 @@ class MovieDetailAppBar extends StatelessWidget {
   const MovieDetailAppBar({Key? key, required this.movieDetailEntity})
       : super(key: key);
 
-  get movieDataEntity => null;
+  get movieDataEntity => movieDetailEntity;
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +49,13 @@ class MovieDetailAppBar extends StatelessWidget {
               );
             } else {
               return IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  BlocProvider.of<FavouriteBloc>(context).add(
+                      ToggleFavouriteMovieEvent(
+                          movieEntity: MovieEntity.fromMovieDetailEntity(
+                              movieDetailEntity: movieDataEntity),
+                          isFavourite: true));
+                },
                 icon: Icon(Icons.favorite_border_rounded,
                     color: Colors.white, size: Sizes.dimen_12.h),
               );

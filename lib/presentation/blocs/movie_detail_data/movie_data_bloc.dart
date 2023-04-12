@@ -47,10 +47,10 @@ class MovieDataBloc extends Bloc<MovieDataEvent, MovieDataState> {
         videoBloc.add(LoadVideoEvent(movieId: event.movieId));
         //bloc will call the state
         return eitherResponse.fold(
-          (l) => MovieDataError(),
-          (r) => MovieDataLoaded(
+          (l) => emit(MovieDataError()),
+          (r) => emit(MovieDataLoaded(
             movieDetailEntity: r,
-          ),
+          )),
         );
       }
     });

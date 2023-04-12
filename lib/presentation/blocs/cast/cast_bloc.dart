@@ -19,7 +19,7 @@ class CastBloc extends Bloc<CastEvent, CastState> {
             await getCast(MovieParams(event.movieId));
 
         return eitherResponse.fold(
-            (l) => CastErrorState(), (r) => CastLoaded(casts: r));
+            (l) => emit(CastErrorState()), (r) => emit(CastLoaded(casts: r)));
       }
     });
   }

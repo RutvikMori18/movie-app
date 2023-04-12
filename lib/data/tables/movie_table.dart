@@ -5,16 +5,19 @@ part 'movie_table.g.dart';
 
 @HiveType(typeId: 0)
 class MovieTable extends MovieEntity {
+  @override
   @HiveField(1)
   final int id;
+  @override
   @HiveField(2)
   final String title;
+  @override
   @HiveField(3)
   final String posterPath;
   MovieTable({required this.title, required this.posterPath, required this.id})
       : super(
           posterPath: posterPath,
-          id:id,
+          id: id,
           title: title,
           releaseDate: '',
           voteAverage: 0.0,

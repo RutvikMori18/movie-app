@@ -27,10 +27,10 @@ class SearchMoviesBloc extends Bloc<SearchMoviesEvent, SearchMoviesState> {
               await searchMovies(
                   MovieSearchParams(searchText: event.searchData));
           loadingBloc.add(FinishLoading());
-          return eitherResponse
-              .fold((l) => SearchMoviesError(errorType: l.appErrorType), (r) {
+          return eitherResponse.fold(
+              (l) => emit(SearchMoviesError(errorType: l.appErrorType)), (r) {
             print('data---->${r.toString()}');
-            SearchMoviesDataState(r);
+            emit(SearchMoviesDataState(r));
           });
         }
       }

@@ -15,7 +15,9 @@ class CastWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<CastBloc, CastState>(builder: (context, state) {
       if (state is CastLoaded) {
+        print("state----$state");
         return Container(
+          color: Colors.greenAccent,
           height: Sizes.dimen_105.h,
           child: ListView.builder(
               scrollDirection: Axis.horizontal,

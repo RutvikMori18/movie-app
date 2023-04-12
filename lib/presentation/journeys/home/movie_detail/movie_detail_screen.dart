@@ -111,13 +111,8 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                 return const Center(
                     child: Text('ufff there is some error occur'));
               } else if (state is MovieDataInitial) {
-                return Center(
-                  child: Container(
-                    height: 100,
-                    width: 100,
-                    color: Colors.deepOrange,
-                    child: const Center(child: CircularProgressIndicator()),
-                  ),
+                return const Center(
+                  child: Center(child: CircularProgressIndicator()),
                 );
               } else {
                 return const Text('No data');
