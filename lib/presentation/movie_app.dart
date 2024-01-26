@@ -12,7 +12,7 @@ import 'package:movieapp/presentation/wiredash_app.dart';
 
 import '../common/constants/language.dart';
 import '../common/constants/route_constants.dart';
-import 'blocs/loading/loading_bloc.dart';
+import 'blocs/loading/loading_cubit.dart';
 import 'blocs/movie_langauge/language_bloc.dart';
 import 'fade_page_route_builder.dart';
 import 'journeys/loading/loading_screen.dart';
@@ -31,9 +31,8 @@ class MovieApp extends StatefulWidget {
 class _MovieAppState extends State<MovieApp> {
   final _navigatorKey = GlobalKey<NavigatorState>();
   late LanguageBloc _languageBloc;
-  late LoadingBloc loadingBloc;
+  late LoadingCubit loadingBloc;
   Locale? _locale;
-
 
   void setLocale(Locale locale) {
     setState(() {
@@ -50,7 +49,7 @@ class _MovieAppState extends State<MovieApp> {
     AppLocalization(const Locale('en'));
     _languageBloc = getInstance<LanguageBloc>();
     _languageBloc.add(LoadPreferredEvent());
-    loadingBloc = getInstance<LoadingBloc>();
+    loadingBloc = getInstance<LoadingCubit>();
   }
 
   @override
@@ -66,9 +65,8 @@ class _MovieAppState extends State<MovieApp> {
     return MultiBlocProvider(
       providers: [
         BlocProvider<LanguageBloc>.value(value: _languageBloc),
-        BlocProvider<LoadingBloc>.value(value: loadingBloc),
+        BlocProvider<LoadingCubit>.value(value: loadingBloc),
       ],
-
       child: BlocBuilder<LanguageBloc, LanguageState>(
         builder: (context, state) {
           if (state is LanguageLoaded) {
@@ -95,6 +93,7 @@ class _MovieAppState extends State<MovieApp> {
                 localizationsDelegates: [
                   AppLocalization.delegate,
                   GlobalMaterialLocalizations.delegate,
+                  GlobalCupertinoLocalizations.delegate,
                   GlobalWidgetsLocalizations.delegate,
                 ],
                 localeResolutionCallback: (deviceLocal, supportedLocales) {

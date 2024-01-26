@@ -30,7 +30,7 @@ import '../data/repositories/app_repository_impl.dart';
 import '../domain/usecases/che_if_fav.dart';
 import '../domain/usecases/get_preferred_language.dart';
 import '../domain/usecases/save_movie.dart';
-import '../presentation/blocs/loading/loading_bloc.dart';
+import '../presentation/blocs/loading/loading_cubit.dart';
 
 final getInstance = GetIt.I;
 
@@ -92,7 +92,7 @@ Future init() async {
   getInstance.registerFactory(() => MovieCarouselBloc(
       getTrending: getInstance(),
       movieBackdropBloc: getInstance(),
-      loadingBloc: getInstance()));
+      loadingCubit: getInstance()));
 
   //registerFactory used to instant register the blocs
   getInstance.registerFactory(
@@ -105,7 +105,7 @@ Future init() async {
 
   getInstance.registerFactory(
     () => MovieDataBloc(
-      loadingBloc: getInstance(),
+      loadingCubit: getInstance(),
       getMovieDetail: getInstance(),
       castBloc: getInstance(),
       videoBloc: getInstance(),
@@ -120,7 +120,7 @@ Future init() async {
   );
   getInstance.registerFactory<SearchMoviesBloc>(
     () => SearchMoviesBloc(
-        searchMovies: getInstance(), loadingBloc: getInstance()),
+        searchMovies: getInstance(), loadingCubit: getInstance()),
   );
 
   getInstance.registerFactory<GetVideoBloc>(
@@ -134,5 +134,5 @@ Future init() async {
   //for single used singleton
   getInstance.registerSingleton<LanguageBloc>(LanguageBloc(
       getPreferredLanguage: getInstance(), updateLanguage: getInstance()));
-  getInstance.registerSingleton<LoadingBloc>(LoadingBloc());
+  getInstance.registerSingleton<LoadingCubit>(LoadingCubit());
 }

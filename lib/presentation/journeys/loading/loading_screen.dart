@@ -5,7 +5,7 @@ import 'package:movieapp/common/extensions/size_extension.dart';
 import 'package:movieapp/presentation/journeys/loading/loading_circle.dart';
 import 'package:movieapp/presentation/themes/theme_color.dart';
 
-import '../../blocs/loading/loading_bloc.dart';
+import '../../blocs/loading/loading_cubit.dart';
 
 class LoadingScreen extends StatefulWidget {
   final Widget screen;
@@ -19,13 +19,13 @@ class LoadingScreen extends StatefulWidget {
 class _LoadingScreenState extends State<LoadingScreen> {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<LoadingBloc, LoadingState>(
-      builder: (context, state) {
+    return BlocBuilder<LoadingCubit, bool>(
+      builder: (context, showLoading) {
         return Stack(
           fit: StackFit.expand,
           children: [
             widget.screen,
-            if (state is LoadingStartedState)
+            if (showLoading )
               Container(
                 decoration: BoxDecoration(
                   color: AppTheme.vulcan.withOpacity(0.8),

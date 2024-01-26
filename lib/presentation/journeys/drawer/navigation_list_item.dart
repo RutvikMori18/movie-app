@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:movieapp/common/extensions/size_extension.dart';
 
@@ -43,7 +45,10 @@ class NavigationSubListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: onTap(),
+      onTap: () {
+        onTap();
+        log("tapp call");
+      },
       child: Container(
         decoration: BoxDecoration(
           boxShadow: [

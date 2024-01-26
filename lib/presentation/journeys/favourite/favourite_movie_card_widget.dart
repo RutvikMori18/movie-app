@@ -5,7 +5,7 @@ import 'package:movieapp/common/constants/size_constants.dart';
 import 'package:movieapp/common/extensions/size_extension.dart';
 import 'package:movieapp/domain/entities/movie_entity.dart';
 import 'package:movieapp/presentation/blocs/favourite/favourite_bloc.dart';
-import 'package:movieapp/presentation/blocs/loading/loading_bloc.dart';
+import 'package:movieapp/presentation/blocs/loading/loading_cubit.dart';
 
 import '../../../data/core/api_constants.dart';
 import '../home/movie_detail/movie_detail_argument.dart';

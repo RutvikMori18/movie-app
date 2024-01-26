@@ -64,7 +64,7 @@ class NavigationDrawer extends StatelessWidget {
                         .add(ToggleLanguageEvent(
                       Language.languages[index],
                     ));
-                    BlocProvider.of<LanguageBloc>(context).state;
+                    // BlocProvider.of<LanguageBloc>(context).state;
                   },
                   children: Language.languages.map((e) => e.value).toList(),
                 ),

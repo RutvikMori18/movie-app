@@ -15,8 +15,4 @@ class MovieBackdropBloc extends Bloc<MovieBackdropEvent, MovieBackdropState> {
       emit(MovieBackdropChanged((event as MovieBackdropChangedEvent).movie));
     });
   }
-
-  // Stream<MovieBackdropState> mapEventToState(MovieBackdropState event) async* {
-  //   yield MovieBackdropChanged((event as MovieBackdropChangedEvent).movie);
-  // }
 }
